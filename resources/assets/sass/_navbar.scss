@@ -59,7 +59,7 @@
 
 	width: $icon-Weidler-size;
 	height: $icon-Weidler-size;
-	// transform: rotate(-45deg);
+	transform: rotate(-45deg);
 	border: 1px solid green;
 
 	$fwidth: $radiusScale * 0.5em; // This one is the important one
