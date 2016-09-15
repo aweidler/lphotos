@@ -1,0 +1,113 @@
+/**
+ *
+ * All styles pertaining to the navbar
+ *
+ */
+
+@keyframes spin{
+	100% { transform:rotate(360deg); }
+}
+
+
+.navbar-brand{
+	padding: 4px;
+	width: $icon-Weidler-size;
+	height: $icon-Weidler-size;
+	margin-left: 0.5em; //pad for mobile devices so we are not at the edge
+
+	.icon-Weidler_Icon {
+		visibility: hidden;
+		font-size: $icon-Weidler-size;
+		height: $icon-Weidler-size;
+		width: $icon-Weidler-size;
+
+		color: $icon-Weidler-color;
+		text-shadow: none;
+		margin-top: 0;
+		display: inline-block;
+		float: left;
+		transition: text-shadow $icon-Weidler-transition, color $icon-Weidler-transition;
+		position: relative;
+		z-index: 2;
+
+		&:hover{
+			color: $icon-Weidler-hover;
+			text-shadow: 0 0 9px rgba(0,0,0,0.9);
+		}
+
+		// &:hover + .icon-Weidler_Icon_Border{
+		// 	opacity: 1.0;
+		// }
+
+		&:before {
+			content: $icon-Weidler_Icon;
+		}
+	}
+}
+
+.alogo-wrapper{
+	$radiusScale: 4;
+	$flagScale: 1;
+
+	$wrapper-index: 1;
+	z-index: $wrapper-index;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+
+	width: $icon-Weidler-size;
+	height: $icon-Weidler-size;
+	// transform: rotate(-45deg);
+	border: 1px solid green;
+
+	$fwidth: $radiusScale * 0.5em; // This one is the important one
+	// $fwidth: $radiusScale * 1em;
+	$fheight: $radiusScale * 2em;
+
+	.alens-hood{
+		$hoodWidth: 0.6 * $fwidth;
+		$hoodScale: $radiusScale * 2.9em;
+		$center: $hoodScale * -0.5 + $icon-Weidler-size/2;
+
+		position: relative;
+		z-index: length($icon-aperture-colors) + 2; // buffer and extra in case
+		width: $hoodScale;
+		height: $hoodScale;
+		opacity: 0.8;
+		border-radius: 50%;
+		border: $hoodWidth solid #222;
+		top: $center;
+		left: $center;
+	}
+
+
+	.aflag{
+		background: rgba(0,0,0,1);
+		opacity: 1.0;
+		height: $fheight;
+		width: $fwidth * $flagScale;
+		border: 2px solid black;
+		position: absolute;
+		border-top-right-radius: 50%;
+		border-bottom-right-radius: 50%;
+		top: calc(50% - #{$fheight / 2});
+		left: calc(50% - #{$fwidth * $flagScale / 2});
+	}
+
+	@each $aperture-color in $icon-aperture-colors{
+		$i: index($icon-aperture-colors, $aperture-color);
+		.aflag-#{$i}{
+			z-index: #{$wrapper-index + $i};
+			background: $aperture-color;
+			// background: black;
+
+			// transform our 'aperture flags' around a circle
+			$degrees: ($i - 1) * (360 / length($icon-aperture-colors));
+			$point: parametric(0, 0, $radiusScale - ($flagScale / $radiusScale), $degrees * 1deg);
+			transform: translate(#{map-get($point, x)}em, #{map-get($point, y)}em) rotate(#{$degrees}deg);
+		}
+	}
+
+}

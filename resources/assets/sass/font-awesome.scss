@@ -1,0 +1,14 @@
+
+/*===================================
+=            CDN Warning            =
+===================================*/
+
+// We will override the path to the fonts
+$fa-font-path:        "../fonts/font-awesome";
+
+// Here we will just import font-awesome for now, we could customize the default style later
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// Do not customize this file, it is just a backup. The font-awesome cdn will be used
+
+/*=====  End of CDN Warning  ======*/
