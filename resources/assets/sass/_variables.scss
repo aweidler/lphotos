@@ -8,4 +8,32 @@ $icon-Weidler-color: #999 !default;
 $icon-Weidler-hover: #fefefe !default;
 $icon-Weidler-transition: 0.5s;
 $icon-Weidler-size: 2.5em;
-$icon-aperture-colors: (blue, green, red, cyan, yellow, purple);
+
+
+$linkSpeed: 0.8s;
+
+/**
+ *
+ * Control for the aperture logo
+ *
+ */
+
+// The list of colors for each flag, the amount of colors will be the amount of flags in the aperture hood
+// $icon-aperture-colors: (yellow, blue, green, red, purple, pink, brown, cyan);
+$icon-aperture-colors: (#00b38f, #cc9900, #009933, #006699, #b300b3, #e65c00, #9933ff, #cc0000);
+
+// the factor to scale the full aperture logo by
+$radiusScale: 3.5;
+
+// the starting position of the aperture flags from 0 to 2
+// 0 would represent a fully open aperture ie. 1f while 2 would be a fully closed aperture ie. 10f
+$flagScale: 0.7;
+
+// the final position of the aperture flags after the animation completes from 0 to 2
+$finalFlagScale: 1.4;
+
+// the speed of the aperture flag animation in seconds
+$flagAnimSpeed: 0.8s;
+
+// the type of animation curve to use
+$flagAnimCurve: ease;

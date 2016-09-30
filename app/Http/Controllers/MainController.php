@@ -7,7 +7,7 @@ use Photos\Http\Requests;
 
 class MainController extends Controller
 {
-	private $asides = 6;
+	private $asides = 8;
 
 	public function __construct(){
 

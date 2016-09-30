@@ -8,15 +8,14 @@
 	<title>@yield('title', Config::get('mysite.default_title'))</title>
 
 	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' id="fontawesome_cdn">
-	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
 	<!-- Styles -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap_cdn">
 	<link href="{{ URL::asset(bustAsset('css/app.css')) }}" rel="stylesheet">
 </head>
 <body id="app-layout">
-
 	@include('layouts.header')
 
 
