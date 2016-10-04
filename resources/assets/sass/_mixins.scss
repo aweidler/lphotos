@@ -1,1 +1,10 @@
-@import "math_mixins"
+// Grab some math functions
+@import "math_mixins";
+
+// font mixins
+
+@mixin font-A($size: $default-fontA-size, $color: $default-fontA-color){
+	font-family: $fontA;
+	font-size: $size;
+	color: $color;
+}

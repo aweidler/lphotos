@@ -3,6 +3,10 @@ $icomoon-font-path: "../fonts/myfonts" !default;
 $icon-Weidler_Icon_Border: "\e900";
 $icon-Weidler_Icon: "\e901";
 
+$fontA: 'Cairo', sans-serif;
+$default-fontA-size: 12pt !default;
+$default-fontA-color: #222;
+
 // Branding info
 $icon-Weidler-color: #999 !default;
 $icon-Weidler-hover: #fefefe !default;
@@ -10,7 +14,7 @@ $icon-Weidler-transition: 0.5s;
 $icon-Weidler-size: 2.5em;
 
 
-$linkSpeed: 0.8s;
+$linkSpeed: 0.15s;
 
 /**
  *

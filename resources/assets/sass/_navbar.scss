@@ -8,21 +8,8 @@ $fwidth: $radiusScale * 0.5em;
 $fheight: $radiusScale * 2em;
 $ffinalHeight: $fheight;
 
-@keyframes anim_linkhover{
-	0%, 100% { 
-		color: darken($icon-Weidler-color, 30%);
-		text-shadow: none;
-	}
-	50% {
-		color: transparent;
-		text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.66);
-	}
-}
 
 .alogo-wrapper{
-	// testingonly
-	// visibility: hidden;
-
 	$wrapper-index: 1;
 	z-index: $wrapper-index;
 	position: relative;
@@ -145,9 +132,6 @@ $ffinalHeight: $fheight;
 	}
 
 	.icon-Weidler_Icon {
-		//testingonly
-		// visibility: hidden;
-
 		font-size: $icon-Weidler-size;
 		color: $icon-Weidler-color;
 		text-shadow: none;
@@ -163,19 +147,20 @@ $ffinalHeight: $fheight;
 }
 
 .navbar{
+	$size: 0.2em;
+	$gradient: 'linear-gradient(to right';
+	@each $aperture-color in $icon-aperture-colors{
+		$i: index($icon-aperture-colors, $aperture-color);
+		$percent: "#{($i - 1) / length($icon-aperture-colors) * 100}%";
+		$thiscolor: "#{$aperture-color} #{$percent}";
+		$gradient: "#{$gradient}, #{$thiscolor}";
+	}
+	$gradient: "#{$gradient});";
+	$navbarBackground: #fbfbfb;
+
+	background: $navbarBackground;
 
 	&:after{
-		$size: 0.2em;
-
-		$gradient: 'linear-gradient(to right';
-		@each $aperture-color in $icon-aperture-colors{
-			$i: index($icon-aperture-colors, $aperture-color);
-			$percent: "#{($i - 1) / length($icon-aperture-colors) * 100}%";
-			$thiscolor: "#{$aperture-color} #{$percent}";
-			$gradient: "#{$gradient}, #{$thiscolor}";
-		}
-		$gradient: "#{$gradient});";
-
 		content: '';
 		width: 100%;
 		position: absolute;
@@ -185,37 +170,108 @@ $ffinalHeight: $fheight;
 		background: #333;
 		background: #{$gradient};
 	}
-}
-
-.navbar{
-	$navbarBackground: #fbfbfb;
-	background: $navbarBackground;
-
-	li{
-		font-family: 'Cairo', sans-serif;
-		font-size: 12pt;
-		color: black;
-
-		a{
-			color: darken($icon-Weidler-color, 30%);
-			padding-top: 11px;
-			padding-bottom: 11px;
-			border: 2px solid $navbarBackground;
-		}
-
-		&:hover a{
-			animation: anim_linkhover $linkSpeed ease-in-out;
-			border-color: darken($icon-Weidler-color, 30%);
-			box-shadow: inset 0px 0px 15px 3px rgba(0,0,0,0.4);
-			background: none;
-		}
-
-		&.active a{
-			background: green;
-		}
-	}
 
 	#aw_navbar{
 		margin-left: (4.5 + $radiusScale) * 1em;
+
+		li{
+			@include font-A($color: black);
+			box-sizing: border-box;
+			border-top: $size solid transparent;
+
+			transition: border-top-color $linkSpeed;
+
+			a{
+				color: darken($icon-Weidler-color, 20%);
+				display: block;
+				margin: 0;
+				padding-top: $size * 3;
+				padding-bottom: $size * 3;
+				border: 2px solid $navbarBackground;
+				background: none;
+
+				transition: text-shadow $linkSpeed, color $linkSpeed;
+			}
+
+			@each $aperture-color in $icon-aperture-colors{
+				$i: index($icon-aperture-colors, $aperture-color);
+
+				&:nth-child(#{$i}){
+
+					a.blur{
+						color: transparent;
+						text-shadow: 0px 0px 2px rgba(darken($aperture-color, 10%), 0.7);
+					}
+
+					&:hover, &.active{
+						border-top-color: $aperture-color;
+
+						a{
+							color: darken($aperture-color, 10%);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.navbar-toggle{
+		border: 2px solid $icon-Weidler-color;
+		margin-top: 5px;
+		border-radius: 3px;
+		position: relative;
+		width: 46px;
+		height: 36px;
+		padding: 0;
+		padding-top: 3px;
+
+		&:hover{
+			background-color: #eee;
+		}
+
+		&:not(.collapsed) .toggle-bar{
+			.left{
+				transform: skewY(-25deg);
+			}
+			.right{
+				transform: skewY(25deg);
+			}
+		}
+
+		.toggle-bar{
+			width: 100%;
+			display: block;
+			height: 8px;
+			vertical-align: top;
+			font-size: 0;
+			backface-visibility: hidden;
+		}
+
+		.toggle-bar > span{
+			width: 10px;
+			height: 4px;
+			display: inline-block;
+			padding: 0;
+			backface-visibility: hidden;
+
+			transition: transform 0.5s;
+
+			&.left{
+				border-top-left-radius: 1px;
+				border-bottom-left-radius: 1px;
+			}
+
+			&.right{
+				border-top-right-radius: 1px;
+				border-bottom-right-radius: 1px;
+			}
+		}
+
+		@for $i from 1 through 4{
+			.toggle-bar:nth-child(#{$i}) > span{
+				$color: nth($icon-aperture-colors, $i);
+				background-color: $color;
+			}
+		}
 	}
 }
