@@ -17,9 +17,6 @@
 				<div class="toggle-bar">
 					<span class="left"></span><span class="right"></span>
 				</div>
-{{-- 				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span> --}}
 			</button>
 
 			{{-- Branding Image --}}
@@ -36,10 +33,12 @@
 		</div>
 		<div class="collapse navbar-collapse" id="aw_navbar">
 			<ul class="navbar-nav nav navbar-links">
-				<li {{-- class="active" --}}><a href="#">Photos<span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Albums</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
+				<li {{-- class="active" --}}><a href="#">{{ trans('aria.link.photos') }}
+					<span class="sr-only">({{ trans('aria.current') }})</span></a>
+				</li>
+				<li><a href="#">{{ trans('aria.link.albums') }}</a></li>
+				<li><a href="#">{{ trans('aria.link.about') }}</a></li>
+				<li><a href="#">{{ trans('aria.link.contact') }}</a></li>
 			</ul>
 		</div>
 	</div>
