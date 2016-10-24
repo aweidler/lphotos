@@ -26,7 +26,7 @@
 			{{-- The crazy logo --}}
 			<div class="alogo-wrapper">
 				<div class="alens-hood"></div>
-				@for($i=1; $i<=$asides; $i++)
+				@for($i=1; $i<=$aperture_sides; $i++)
 					<div class="aflag aflag-{{$i}}"></div>
 				@endfor
 			</div>

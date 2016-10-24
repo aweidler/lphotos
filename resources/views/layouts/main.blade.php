@@ -20,10 +20,9 @@
 
 
 
-
-	@yield('contents', 'Uh Oh. What we\'ve got no content')
-
-
+	<div id="main_content">
+		@yield('contents', 'Uh Oh. What we\'ve got no content')
+	</div>
 
 
 

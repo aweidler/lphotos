@@ -147,7 +147,7 @@ $ffinalHeight: $fheight;
 }
 
 .navbar{
-	$size: 0.2em;
+	$size: $gradientBarSize;
 	$gradient: 'linear-gradient(to right';
 	@each $aperture-color in $icon-aperture-colors{
 		$i: index($icon-aperture-colors, $aperture-color);
@@ -165,7 +165,7 @@ $ffinalHeight: $fheight;
 		width: 100%;
 		position: absolute;
 		left:0;
-		bottom: 0;
+		bottom: $size * -1;
 		height: $size;
 		background: #333;
 		background: #{$gradient};
