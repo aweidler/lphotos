@@ -159,6 +159,8 @@ $ffinalHeight: $fheight;
 	$navbarBackground: #fbfbfb;
 
 	background: $navbarBackground;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.85);
+	min-height: 0;
 
 	&:after{
 		content: '';
@@ -185,8 +187,8 @@ $ffinalHeight: $fheight;
 				color: darken($icon-Weidler-color, 20%);
 				display: block;
 				margin: 0;
-				padding-top: $size * 3;
-				padding-bottom: $size * 3;
+				padding-top: 0.5em;
+				padding-bottom: 0.5em;
 				border: 2px solid $navbarBackground;
 				background: none;
 

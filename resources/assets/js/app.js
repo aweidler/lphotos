@@ -1,6 +1,5 @@
 $(function(){
-
-
+	
 	// old carousel stuff
 	var $carousels = $('#fsCarouselMiddle, #fsCarouselLeft, #fsCarouselRight');
 
@@ -11,7 +10,9 @@ $(function(){
 	});
 
 	$('#fsCarouselMiddle .carousel-indicators > li').click(function(e){
-		$carousels.carousel('next');
+		$('#fsCarouselMiddle').carousel('next');
+		$('#fsCarouselLeft').carousel('next');
+		$('#fsCarouselRight').carousel('next');
 	});
 
 });

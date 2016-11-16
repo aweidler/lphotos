@@ -62,17 +62,8 @@
 	</div>
 </div>
 
-
-
-{{-- This is a new html5 canvas method! --}}
-<div id="fsCanvasWrapper" class="container-fluid">
-	<svg id="fsSVG" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
-		<image xlink:href="{{URL::asset('/image/1.jpg')}}" x="0" y="0" width="100%" height="100%" />
-		<image xlink:href="{{URL::asset('/image/2.jpg')}}" x="0" y="0" width="100%" height="100%" />
-		<image xlink:href="{{URL::asset('/image/3.jpg')}}" x="0" y="0" width="100%" height="100%" />
-	</svg>
+<div>
+	This is some cool content down here!
 </div>
-
-
 
 @endsection
