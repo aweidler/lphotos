@@ -20,6 +20,14 @@ $contentOffset: 45px; // 50px at 16px base
 $gradientBarSize: 0.3em;
 
 $bodyBackground: rgb(250, 250, 250);
+
+
+// Sizing
+$res-sml: "only screen and (max-width : #{$screen-sm-min})";
+$res-med: "only screen and (max-width : #{$screen-md-min})";
+$res-lrg: "only screen and (max-width : #{$screen-lg-min})";
+
+
 /**
  *
  * Control for the aperture logo
