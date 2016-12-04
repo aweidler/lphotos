@@ -156,7 +156,6 @@ $ffinalHeight: $fheight;
 		$gradient: "#{$gradient}, #{$thiscolor}";
 	}
 	$gradient: "#{$gradient});";
-	$navbarBackground: #fbfbfb;
 
 	background: $navbarBackground;
 	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.85);
@@ -191,6 +190,7 @@ $ffinalHeight: $fheight;
 				padding-bottom: 0.5em;
 				border: 2px solid $navbarBackground;
 				background: none;
+				text-decoration: none;
 
 				transition: text-shadow $linkSpeed, color $linkSpeed;
 			}

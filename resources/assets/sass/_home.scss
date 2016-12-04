@@ -1,0 +1,55 @@
+/**
+ *
+ * All styles pertaining to the home area
+ * stuff
+ */
+
+
+.fsMiddle{
+	// border: 1px solid #ccc;
+	background-color: #fdfdfd;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	box-shadow: 0px -1px 10px 0px rgba(0,0,0,0.5);
+
+	article{
+		font-family: $fontB;
+		font-size: 12pt;
+		margin-top: 1em;
+	}
+
+	h1, h4{
+		font-family: $fontA;
+		color: $icon-Weidler-color/2;
+	}
+	h1{
+		// white-space: nowrap;
+	}
+
+	h1 > span.fscanim{
+		@include anim-color-changing();
+	}
+
+	h4{ 
+		margin-left: 12em;
+		@media #{$res-sml} {
+			margin-left: 1em;
+		}
+
+		margin-top: -0.5em;
+
+		& > span{
+			font-family: $fontC;
+			font-size: 16pt;
+		}
+	}
+
+	.myimage{
+		padding: 0;
+		img{
+			width: 100%;
+			border-left: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+		}
+	}
+}

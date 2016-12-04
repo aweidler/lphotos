@@ -8,7 +8,7 @@
 	<title>@yield('title', Config::get('mysite.default_title'))</title>
 
 	<!-- Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cairo|Mr+Dafoe|Open+Sans" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' id="fontawesome_cdn">
 
 	<!-- Styles -->
@@ -24,8 +24,7 @@
 		@yield('contents', 'Uh Oh. What we\'ve got no content')
 	</div>
 
-
-
+	@include('layouts.footer')
 
 
 	<!-- JQuery JS CDN -->

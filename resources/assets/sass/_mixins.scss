@@ -1,6 +1,15 @@
 // Grab some math functions
 @import "math_mixins";
 
+$fsChangeTime: 10s;
+@keyframes fsColorChange {
+	@each $aperture-color in $icon-aperture-colors{
+		$i: index($icon-aperture-colors, $aperture-color)-1;
+		#{$i/length($icon-aperture-colors) * 100}%	{color: $aperture-color;}
+	}
+	100% {color: nth($icon-aperture-colors, 1)}
+}
+
 @mixin aspect-ratio($width, $height) {
 	position: relative;
 	&:before {
@@ -25,4 +34,12 @@
 	font-family: $fontA;
 	font-size: $size;
 	color: $color;
+}
+
+@mixin anim-color-changing($speed: $fsChangeTime, $seed: 0){
+	color: black;
+	animation-delay: -1 * $seed * $speed;
+	animation-name: fsColorChange;
+	animation-duration: #{$speed * length($icon-aperture-colors)};
+	animation-iteration-count: infinite;
 }

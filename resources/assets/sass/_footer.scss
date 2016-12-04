@@ -1,0 +1,41 @@
+/**
+ *
+ * All styles pertaining to the image switching carousel
+ * stuff
+ */
+
+ .footer{
+ 	background-color: $navbarBackground;
+ 	height: 100%;
+ 	border-top: 1px solid #ccc;
+ 	padding: 10px;
+ 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+
+ 	p, ul{
+ 		margin: 0;
+ 		font-size: 12px;
+ 	}
+
+ 	ul{
+ 		list-style: none;
+ 		margin: 0;
+ 		padding: 0;
+
+ 		li{
+ 			display: inline-block;
+ 			margin: 0 4px;
+ 		}
+ 	}
+
+ 	.left{
+ 		text-align: left;
+ 	}
+ 	.right{
+ 		text-align: right;
+ 		@media #{$res-sml} {
+ 			text-align: center;
+ 			margin-top: 5px;
+ 			padding: 0
+ 		}
+ 	}
+ }

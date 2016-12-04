@@ -27,7 +27,7 @@ $fsmaxheight: 35em;
 	background-color: $background;
 
 	max-height: $fsmaxheight;
-	box-shadow: inset 0px -4px 5px 0px rgba(0,0,0,0.68);
+	// box-shadow: inset 0px -4px 5px 0px rgba(0,0,0,0.68);
 
 	@include aspect-ratio($containerW, $containerH);
 
