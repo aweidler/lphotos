@@ -10,7 +10,7 @@ return [
 		'contact' => 'Contact'
 	],
 	'footer' => [
-		'name' => 'Austin K Weidler',
+		'name' => 'Austin K. Weidler',
 		'address' => '665 Millport Rd Lititz, PA 17543, USA',
 		'email' => 'austin.weidler@gmail.com',
 		'phone' => '(717) 824-9433',
@@ -26,5 +26,9 @@ return [
 			I have captured over the past years. Be my guest and browse around,
 			every photo you find on this website is free and you may download
 			as many as you like. Feel free to contact me if you have any comments or questions.'
+	],
+	'upload' => [
+		'addalbum' => 'Add an Album',
+		'uploadphoto' => 'Upload Photos'
 	]
 ];

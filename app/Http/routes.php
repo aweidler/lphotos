@@ -12,3 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/aupload', 'UploadController@index');
+Route::get('/aupload/{id}', 'UploadController@index');
+Route::post('/aupload', 'UploadController@store');
+Route::post('/aupload/{id}', 'UploadController@save');

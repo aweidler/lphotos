@@ -15,7 +15,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap_cdn">
 	<link href="{{ URL::asset(bustAsset('css/app.css')) }}" rel="stylesheet">
 </head>
-<body id="app-layout">
+<body id="app-layout" data-path="{{ env('APP_URL') }}">
 	@include('layouts.header')
 
 
@@ -64,6 +64,6 @@
 	</script>
 
 	<!-- My JS -->
-	<script src="{{ URL::asset(bustAsset('js/app.js')) }}"></script>
+	<script src="{{ URL::asset(bustAsset('js/app.min.js')) }}"></script>
 </body>
 </html>

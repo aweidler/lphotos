@@ -15,5 +15,9 @@ return [
 
     'previous' => '&laquo; Previous',
     'next'     => 'Next &raquo;',
+    'add' => 'Add',
+    'save' => 'Save',
+    'delete' => 'Delete',
+    'upload' => 'Upload'
 
 ];

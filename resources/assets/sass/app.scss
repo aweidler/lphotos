@@ -9,6 +9,7 @@
 @import "footer";
 @import "carousel";
 @import "home";
+@import "upload";
 
 // Global SCSS styles
 
@@ -28,4 +29,8 @@ a{
 a:hover{
 	@include anim-color-changing(1.5s, random(length($icon-aperture-colors)));
 	text-decoration: none;
+}
+
+#main_content{
+	margin-top: calc(#{$contentOffset} + #{$gradientBarSize}); // 0.2 is the height of the gradient
 }

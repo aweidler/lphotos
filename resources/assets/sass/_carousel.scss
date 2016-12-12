@@ -15,7 +15,6 @@ $fsmaxheight: 35em;
 #fsWrapper{
 	$background: #2d2d2d;
 
-	margin-top: calc(#{$contentOffset} + #{$gradientBarSize}); // 0.2 is the height of the gradient
 	overflow: hidden;
 	white-space: nowrap;
 	overflow: hidden;
