@@ -8,9 +8,9 @@
 		"email": "austin.weidler@gmail.com"
 	},
 	"require": {
-		"php": ">=5.6.4",
-		"laravel/framework": "5.3.*",
-		"laravelcollective/html": "^5.3.0"
+		"php": ">=5.5.38",
+		"laravel/framework": "5.2.*",
+		"laravelcollective/html": "^5.2.0"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",
@@ -37,18 +37,18 @@
 	},
 	"scripts": {
 		"post-root-package-install": [
-			"php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+			"/usr/local/php5/bin/php -r \"file_exists('.env') || copy('.env.example', '.env');\""
 		],
 		"post-create-project-cmd": [
-			"php artisan key:generate"
+			"/usr/local/php5/bin/php artisan key:generate"
 		],
 		"post-install-cmd": [
 			"Illuminate\\Foundation\\ComposerScripts::postInstall",
-			"php artisan optimize"
+			"/usr/local/php5/bin/php artisan optimize"
 		],
 		"post-update-cmd": [
 			"Illuminate\\Foundation\\ComposerScripts::postUpdate",
-			"php artisan optimize"
+			"/usr/local/php5/bin/php artisan optimize"
 		]
 	},
 	"config": {

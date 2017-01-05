@@ -28,18 +28,20 @@
 	<h1>{{trans('aria.upload.uploadphoto')}}</h1>
 
 	{!!
-		Form::select('albumchoice', $albumkeys, $aid, array('id'=>'albumchoice', 'autocomplete'=>'off'))
+		Form::select('albumchoice', $albumkeys, ($selected ? $selected->id : null), array('id'=>'albumchoice', 'autocomplete'=>'off'))
 	!!}
 
-	<form action="{{ url('aupload/'.$album->id) }}" class="fsadd form-inline" enctype="multipart/form-data" method="post">
-		{{ csrf_field() }}
+	@if($selected)
+		<form action="{{ url('aupload/'.$selected->id) }}" class="fsadd form-inline" autocomplete="off" enctype="multipart/form-data" method="post">
+			{{ csrf_field() }}
 
-		<div class="form-group newfiles">
-			<label for="newfiles">Add Photos:</label>
-			<input type="file" name="newfiles" id="newfiles" multiple accept="image/jpeg,.xmp,.CR2">
-			<button type="submit" class="btn btn-success btn-sm">{{trans('pagination.upload')}}</button>
-		</div>
-	</form>
+			<div class="form-group newfiles">
+				<label for="newfiles">{{ trans('pagination.addphotos') . ' ' .$selected->name }}</label>
+				<input type="file" name="newfiles[]" id="newfiles" multiple accept="image/jpeg,.xmp,.CR2">
+				<button type="submit" name="photoup" class="btn btn-success btn-sm">{{trans('pagination.upload')}}</button>
+			</div>
+		</form>
+	@endif
 
 </div>
 

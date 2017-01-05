@@ -4,7 +4,10 @@ namespace Photos\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Photos\Album;
+use Photos\Fileentry;
 use Photos\Http\Requests;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UploadController extends MainController
 {
@@ -16,16 +19,16 @@ class UploadController extends MainController
 	public function index(Request $request = null)
 	{
 		$albums = Album::all();
-		$aid = null;
+		$selected = null;
 		if($request){
-			$aid = $request->id;
+			$selected = Album::find($request->id);
 		}
 
 		$albumkeys = array('' => 'Select Album&hellip;');
 		foreach($albums as $album){
 			$albumkeys[$album->id] = $album->name;
 		}
-		return view('components.upload', ['albums'=>$albums, 'aid'=>$aid, 'albumkeys'=>$albumkeys]);
+		return view('components.upload', ['albums'=>$albums, 'selected'=>$selected, 'albumkeys'=>$albumkeys]);
 	}
 
 	/**
@@ -50,20 +53,31 @@ class UploadController extends MainController
 	}
 
 	public function save(Request $request){
-
-
+		$myalbum = Album::find($request->id);
 		if(isset($request->save)){
 			$this->validate($request, [
 				'name' => 'unique:albums|max:100',
 			]);
 
-			$myalbum = Album::find($request->id);
 			$myalbum->name = $request->name;
 			$myalbum->save();
 		}
 		else if(isset($request->delete)){
-			$myalbum = Album::find($request->id);
 			$myalbum->delete();
+		}
+		else if(isset($request->photoup)){
+			// Upload some images
+			foreach($request->newfiles as $file){
+				$extension = $file->getClientOriginalExtension();
+				if(Storage::disk('public')->put($file->getFilename().'.'.$extension,  File::get($file))){
+					$entry = new Fileentry();
+					$entry->mime = $file->getClientMimeType();
+					$entry->original_filename = $file->getClientOriginalName();
+					$entry->filename = $file->getFilename().'.'.$extension;
+					$entry->save();
+				}
+			}
+			die();
 		}
 
 		return $this->index();

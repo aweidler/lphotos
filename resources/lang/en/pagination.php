@@ -18,6 +18,7 @@ return [
     'add' => 'Add',
     'save' => 'Save',
     'delete' => 'Delete',
-    'upload' => 'Upload'
+    'upload' => 'Upload',
+    'addphotos' => 'Add photos to '
 
 ];
