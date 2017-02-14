@@ -14,6 +14,54 @@
 		width: 200px;
 	}
 
+	.imagecell{
+		display: inline-block;
+		margin: 5px;
+		border: 2px solid #999;
+		border-radius: 4px;
+		width: 150px;
+		height: 150px;
+		overflow: hidden;
+		text-align: center;
+		position: relative;
+
+		img{
+			max-height: 100%;
+		}
+
+		.labels{
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-size: 8px;
+			z-index: 2;
+		}
+
+		label{
+			font-family: 'Courier';
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 2px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			color: #999;
+		}
+
+		.options{
+			text-align: right;
+			padding:0 4px;
+			position: absolute;
+			height: 15%;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background-color: rgba(255, 255, 255, 0.8);
+
+			span{
+				margin-right: 16px;
+			}
+		}
+	}
+
 	.curalbum{
 		padding: 5px;
 	}

@@ -158,6 +158,7 @@ return [
         Photos\Providers\AuthServiceProvider::class,
         Photos\Providers\EventServiceProvider::class,
         Photos\Providers\RouteServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -206,6 +207,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+       	/**
+       	 * Application Aliases
+       	 */
+       	'Image' => Intervention\Image\Facades\Image::class
+       	
     ],
 
 ];

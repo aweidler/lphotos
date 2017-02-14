@@ -14,5 +14,17 @@
 Route::get('/', 'HomeController@index');
 Route::get('/aupload', 'UploadController@index');
 Route::get('/aupload/{id}', 'UploadController@index');
+Route::get('/aupload/fdelete/{id}', 'UploadController@deleteFile');
 Route::post('/aupload', 'UploadController@store');
 Route::post('/aupload/{id}', 'UploadController@save');
+
+// images
+Route::get('/img/{driver}/{name}', function($driver, $name){
+	ini_set('memory_limit','256M');
+	$path = Storage::disk($driver)->getDriver()->getAdapter()->getPathPrefix().$name;
+
+	$response = Image::make($path)->response();
+	$response->setLastModified(new DateTime("now"));
+	$response->setExpires(new DateTime("tomorrow"));
+	return $response;
+});

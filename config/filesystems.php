@@ -54,6 +54,42 @@ return [
             'visibility' => 'public',
         ],
 
+        'raw' => [
+            'driver' => 'local',
+            'root' => storage_path('photos/raw'),
+            'visibility' => 'public',
+        ],
+
+        'rawedits' => [
+            'driver' => 'local',
+            'root' => storage_path('photos/rawedits'),
+            'visibility' => 'public',
+        ],
+
+        'small' => [
+            'driver' => 'local',
+            'root' => storage_path('photos/small'),
+            'visibility' => 'public',
+        ],
+
+        'medium' => [
+            'driver' => 'local',
+            'root' => storage_path('photos/medium'),
+            'visibility' => 'public',
+        ],
+
+        'large' => [
+            'driver' => 'local',
+            'root' => storage_path('photos/large'),
+            'visibility' => 'public',
+        ],
+
+        'full' => [
+            'driver' => 'local',
+            'root' => storage_path('photos/full'),
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

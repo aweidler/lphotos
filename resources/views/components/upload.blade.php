@@ -11,6 +11,8 @@
 			{{ csrf_field() }}
 			<div class="form-group curalbum">
 				<input name="name" type="text" maxlength="100" autocomplete="off" value="{{ $album->name }}">
+				<input name="location" type="text" placeholder="Location (City, Province)" maxlength="500" autocomplete="off" value="{{ $album->location }}">
+				{!! Form::select('parent', array(null=>'No Parent') + $albumkeys, $album->parent, array('id'=>'parent', 'autocomplete'=>'off')) !!}
 				<button type="submit" name="save" class="btn btn-default btn-sm">{{trans('pagination.save')}}</button>
 				<button type="submit" name="delete" class="btn btn-danger btn-sm">{{trans('pagination.delete')}}</button>
 			</div>
@@ -20,7 +22,9 @@
 	<form action="{{ url('aupload') }}" class="fsadd form-inline" method="post">
 		{{ csrf_field() }}
 		<div class="form-group newalbum">
-			<input type="text" name="newalbum" maxlength="100" autocomplete="off">
+			<input type="text" placeholder="Name" name="newalbum" maxlength="100" autocomplete="off">
+			<input type="text" placeholder="Location (City, Province)" name="newlocation" maxlength="500" autocomplete="off">
+			{!! Form::select('newparent', array(null=>'No Parent') + $albumkeys, null, array('id'=>'newparent', 'autocomplete'=>'off')) !!}
 			<button type="submit" class="btn btn-success btn-sm">{{trans('pagination.add')}}</button>
 		</div>
 	</form>
@@ -36,12 +40,45 @@
 			{{ csrf_field() }}
 
 			<div class="form-group newfiles">
-				<label for="newfiles">{{ trans('pagination.addphotos') . ' ' .$selected->name }}</label>
+				<label for="newfiles">{{ trans('pagination.addphotos') . ' ' .$selected->name . ' ('.count($files).')' }}</label>
 				<input type="file" name="newfiles[]" id="newfiles" multiple accept="image/jpeg,.xmp,.CR2">
 				<button type="submit" name="photoup" class="btn btn-success btn-sm">{{trans('pagination.upload')}}</button>
 			</div>
 		</form>
 	@endif
+
+	@foreach($files as $file)
+		<div class="imagecell">
+			<img src="{{ url('img/small/'.$file->filename) }}" >
+			<div class = 'labels'>
+				@if(file_exists(storage_path('photos/small/'.$file->filename)))
+					<label>sml</label>
+				@endif
+				@if(file_exists(storage_path('photos/medium/'.$file->filename)))
+					<label>med</label>
+				@endif
+				@if(file_exists(storage_path('photos/large/'.$file->filename)))
+					<label>lrg</label>
+				@endif
+				@if(file_exists(storage_path('photos/full/'.$file->filename)))
+					<label>ful</label>
+				@endif
+				@if(file_exists(storage_path('photos/rawedits/'.$file->hash.'.CR2')))
+					<label>CR2</label>
+				@endif
+				@if(file_exists(storage_path('photos/rawedits/'.$file->hash.'.xmp')))
+					<label>xmp</label>
+				@endif
+			</div>
+
+			<div class="options">
+				<span>{{ $file->hash }}</span>
+				<a href="{{ url('aupload/fdelete/'.$file->id) }}">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
+				</a>
+			</div>
+		</div>
+	@endforeach
 
 </div>
 
