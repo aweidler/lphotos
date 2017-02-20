@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'HomeController@index');
+
+Route::get('/albums', 'AlbumController@index');
+
 Route::get('/aupload', 'UploadController@index');
 Route::get('/aupload/{id}', 'UploadController@index');
 Route::get('/aupload/fdelete/{id}', 'UploadController@deleteFile');

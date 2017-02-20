@@ -12,4 +12,10 @@ class Album extends Model
 		return Fileentry::where('album', '=', $this->id)->get();
 	}
 
+	public function groupedFiles(){
+		$files = $this->allFiles();
+
+		
+	}
+
 }
