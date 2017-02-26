@@ -8,18 +8,43 @@ use Photos\Http\Controllers\UploadController;
 class Fileentry extends Model
 {
 	protected $fillable = ['hash'];
-    protected $table = 'file_entries';
+	protected $table = 'file_entries';
 
-    public function getImage($from = UploadController::DRIVER_MD){
-    	if(file_exists(storage_path('photos/'.$from.'/'.$this->filename))){
-    		return url('img/'.$from.'/'.$this->filename);
-    	}
-    	else if(file_exists(storage_path('photos/small/'.$this->filename))){
-			return url('img/small/'.$this->filename);
-    	}
-    	else{
-    		return url('img/full/'.$this->filename);
-    	}
-    }
+	public function getImage($from = UploadController::DRIVER_MD){
+		if(file_exists($this->getImageOnDisk($from))){
+			return url('img/'.$from.'/'.$this->filename);
+		}
+		else if(file_exists($this->getImageOnDisk(UploadController::DRIVER_SM))){
+			return url('img/'.UploadController::DRIVER_SM.'/'.$this->filename);
+		}
+		else{
+			return url('img/'.UploadController::DRIVER_FL.'/'.$this->filename);
+		}
+	}
+
+	public function widthForHeight($height, $from = UploadController::DRIVER_MD){
+		$file = $this->getImageOnDisk($from);
+		if($file){
+			list($w, $h) = getimagesize($file);
+			$height = min($height, $h);
+			$newwidth = $height * $w / $h;
+			return $newwidth;
+		}
+		return 0;
+	}
+
+	public function heightForWidth($width){
+		$file = $this->getImageOnDisk($from);
+		if($file){
+			list($w, $h) = getimagesize($file);
+			$width = min($width, $w);
+			return $width * $h / $w;
+		}
+		return 0;
+	}
+
+	private function getImageOnDisk($from = UploadController::DRIVER_MD){
+		return storage_path('photos/'.$from.'/'.$this->filename);
+	}
 
 }

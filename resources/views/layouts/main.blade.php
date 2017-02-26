@@ -7,11 +7,11 @@
 
 	<title>@yield('title', Config::get('mysite.default_title'))</title>
 
-	<!-- Fonts -->
+	{{-- Fonts --}}
 	<link href="https://fonts.googleapis.com/css?family=Cairo|Mr+Dafoe|Open+Sans" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' id="fontawesome_cdn">
 
-	<!-- Styles -->
+	{{-- Styles --}}
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap_cdn">
 	<link href="{{ URL::asset(bustAsset('css/app.css')) }}" rel="stylesheet">
 </head>
@@ -27,21 +27,21 @@
 	@include('layouts.footer')
 
 
-	<!-- JQuery JS CDN -->
+	{{-- JQuery JS CDN --}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<!-- jQuery JS local fallback -->
 	<script>window.jQuery || document.write("<script src='{{ URL::asset(bustAsset('js/jquery.min.js')) }}'><\/script>")</script>
 
-	<!-- Bootstrap JS CDN -->
+	{{-- Bootstrap JS CDN --}}
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- Bootstrap JS local fallback -->
+	{{-- Bootstrap JS local fallback --}}
 	<script>
 	if(typeof($.fn.modal) === 'undefined') {
 		document.write("<script src='{{ URL::asset(bustAsset('js/bootstrap.min.js')) }}'><\/script>");
 	}
 	</script>
 
-	<!-- Bootstrap CSS local fallback -->
+	{{-- Bootstrap CSS local fallback --}}
 	<script>
 	$(document).ready(function() {
 		var bodyColor = $('body').css('color');
@@ -51,7 +51,7 @@
 	});
 	</script>
 
-	<!-- Font Awesome CSS local fallback -->
+	{{-- Font Awesome CSS local fallback --}}
 	<div id="FontAwesome_fallback" style="display:none"></div>    
 	<script>(function($) {
 		var $span = $('<span class="fa" style="display:none"></span>');
@@ -63,7 +63,7 @@
 		})(jQuery);
 	</script>
 
-	<!-- My JS -->
+	{{-- My JS --}}
 	<script src="{{ URL::asset(bustAsset('js/app.min.js')) }}"></script>
 </body>
 </html>

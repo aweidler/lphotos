@@ -1,4 +1,7 @@
 $(function(){
+	var END_SCROLL = 2500;
+	var END_FADE = 500;
+	var LAZY_THRESHOLD = 400;
 
 	$.extend($.expr[':'], { 
 		inview: function(el){
@@ -24,6 +27,14 @@ $(function(){
 			lefti = $e.position().left + meLeft,
 			meLeftWidth = meLeft + $w.width();
 			return (lefti >= meLeft && lefti <= meLeftWidth) || (lefti + $e.width() >= meLeft && lefti + $e.width() <= meLeftWidth);
+		},
+		notcontainedenough: function(el){
+			var $e = $(el),
+			$w = $(arguments[1]),
+			meLeft = $w.scrollLeft(),
+			lefti = $e.position().left + meLeft,
+			meLeftWidth = meLeft + $w.width();
+			return !((lefti >= meLeft && lefti <= meLeftWidth) && (lefti + $e.width() >= meLeft && lefti + $e.width() <= meLeftWidth));
 		}
 	});
 
@@ -72,4 +83,24 @@ $(function(){
 
 		$scroller.focusNext(left);
 	});
+
+	$('.pag-scroller').on('scroll', function(e){
+		var $this = $(this); 
+		$alls = $this.find('.fileitem');
+		if($this.data('focused')){
+			$alls.stop().fadeTo(0, 1.0);
+			$this.data('focused', false);
+		}
+		var timer = $this.data('timer');
+		clearTimeout(timer);
+		$this.data('timer', setTimeout(function(){
+			var $items = $this.find('.fileitem:notcontainedenough');
+			if($items.length != $alls.length){
+				$this.data('focused', true);
+				$items.stop().fadeTo(END_FADE, 0.12);
+			}
+		}, END_SCROLL));
+	});
+
+	$('.pag-scroller').unveil(LAZY_THRESHOLD);
 });
