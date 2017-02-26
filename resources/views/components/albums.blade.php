@@ -3,10 +3,8 @@
 
 @section('contents')
 
-<div class="container fs-album-wrapper">
-	@foreach($albums as $album)
-		@include('components.albumrow', ['album' => $album])
-	@endforeach
+<div id="albumWrapper" class="container fs-album-wrapper">
+	@include('components.albumrow', ['albums' => $albums])
 </div>
 
 @endsection
