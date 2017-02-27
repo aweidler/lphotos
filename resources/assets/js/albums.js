@@ -1,20 +1,11 @@
 $(function(){
 	var END_SCROLL = 2500;
 	var END_FADE = 500;
+	var END_FADE_MOBILE = 150;
 	var LAZY_THRESHOLD = 400;
 	var canloadnext = true;
 
 	var $albumWrapper = $('#albumWrapper');
-	var footerheight = $('footer').height();
-
-	function getDocHeight() {
-		var D = document;
-		return Math.max(
-			D.body.scrollHeight, D.documentElement.scrollHeight,
-			D.body.offsetHeight, D.documentElement.offsetHeight,
-			D.body.clientHeight, D.documentElement.clientHeight
-		) - footerheight;
-	}
 
 	$.extend($.expr[':'], { 
 		inview: function(el){
@@ -39,6 +30,7 @@ $(function(){
 			meLeft = $w.scrollLeft(),
 			lefti = $e.position().left + meLeft,
 			meLeftWidth = meLeft + $w.width();
+			$e.data('focusfactor', Math.min(lefti + $e.width(), meLeftWidth) - Math.max(lefti, meLeft));
 			return (lefti >= meLeft && lefti <= meLeftWidth) || (lefti + $e.width() >= meLeft && lefti + $e.width() <= meLeftWidth);
 		},
 		notcontainedenough: function(el){
@@ -91,8 +83,7 @@ $(function(){
 
 	var pageNumber = 2;
 	$(window).scroll(function() {
-		console.log(footerheight);
-		if($(window).scrollTop() + $(window).height() >= getDocHeight()) {
+		if(didHitBottom()) {
 			if(canloadnext){
 				canloadnext = false;
 				$.ajax({
@@ -127,22 +118,42 @@ $(function(){
 	});
 
 	$.fn.bindScroller = function(){
+		var $this = $(this); 
 		$(this).on('scroll', function(e){
-			var $this = $(this); 
+			var timer = $this.data('timer');
+			clearTimeout(timer);
+
 			$alls = $this.find('.fileitem');
 			if($this.data('focused')){
 				$alls.stop().fadeTo(0, 1.0);
 				$this.data('focused', false);
 			}
-			var timer = $this.data('timer');
-			clearTimeout(timer);
-			$this.data('timer', setTimeout(function(){
-				var $items = $this.find('.fileitem:notcontainedenough');
-				if($items.length != $alls.length){
-					$this.data('focused', true);
-					$items.stop().fadeTo(END_FADE, 0.12);
-				}
-			}, END_SCROLL));
+
+			if(isBreakPoint(480)){
+				$this.data('timer', setTimeout(function(){
+					var $items = $this.find('.fileitem:containedview');
+					if($items && $items.length){
+						var $best = null;
+						$items.each(function(i){
+							if(!$best || ($(this).data('focusfactor') && $(this).data('focusfactor') > $best.data('focusfactor'))){
+								$best = $(this);
+							}
+						});
+						if($best){
+							$best.focusImage($this, 200);
+						}
+					}
+				}, END_FADE_MOBILE));
+			}
+			else{
+				$this.data('timer', setTimeout(function(){
+					var $items = $this.find('.fileitem:notcontainedenough');
+					if($items.length != $alls.length){
+						$this.data('focused', true);
+						$items.stop().fadeTo(END_FADE, 0.12);
+					}
+				}, END_SCROLL));
+			}
 		});
 
 		$(this).unveil(LAZY_THRESHOLD);
