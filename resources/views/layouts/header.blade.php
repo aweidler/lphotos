@@ -1,4 +1,12 @@
 @section('header')
+
+<?php
+	$urls = [
+		'albums' => action('AlbumController@index'),
+		'photos' => action('PhotosController@index')
+	];
+?>
+
 <header>
 <nav class="navbar navbar-fixed-top">
 	<div class="container">
@@ -33,14 +41,14 @@
 		<div class="collapse navbar-collapse" id="aw_navbar">
 			<ul class="navbar-nav nav navbar-links">
 				<li class="{{ isset($active) && $active == 'photos' ? 'active' : '' }}" >
-					<a href="#">{{ trans('aria.link.photos') }}
+					<a href="{{ $urls['photos'] }}">{{ trans('aria.link.photos') }}
 					@if(isset($active) && $active == 'photos')
 						<span class="sr-only">({{ trans('aria.current') }})</span>
 					@endif
 					</a>
 				</li>
 				<li class="{{ isset($active) && $active == 'albums' ? 'active' : '' }}">
-					<a href="./albums">{{ trans('aria.link.albums') }}
+					<a href="{{ $urls['albums'] }}">{{ trans('aria.link.albums') }}
 					@if(isset($active) && $active == 'albums')
 						<span class="sr-only">({{ trans('aria.current') }})</span>
 					@endif

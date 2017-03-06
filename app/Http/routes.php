@@ -13,7 +13,9 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/photos', 'PhotosController@index');
 Route::get('/albums', 'AlbumController@index');
+Route::get('/albums/{id}', 'AlbumController@viewAlbum');
 
 Route::get('/aupload', 'UploadController@index');
 Route::get('/aupload/{id}', 'UploadController@index');

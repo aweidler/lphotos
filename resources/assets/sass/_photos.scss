@@ -1,0 +1,24 @@
+#photosWrapper{
+	background-color: #fdfdfd;
+}
+
+.photo-col{
+	box-sizing: border-box;
+	display: inline-block;
+	min-height: 300px;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+	float: left;
+
+	div{
+		padding: 8px;
+	}
+
+	img{
+		width: 100%;
+		box-sizing: border-box;
+		border: 1px solid #333;
+	}
+}

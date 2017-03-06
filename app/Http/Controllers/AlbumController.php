@@ -16,6 +16,16 @@ class AlbumController extends MainController
 		$this->_albums = Album::where('foralbumticker', '=', 1)->paginate(1);
 	}
 
+	public function showAlbum(Request $request){
+		$album = Album::find($request->id);
+		if(!$album){
+			return $this->index($request);
+		}
+
+		// retun view('')
+
+	}
+
 	public function index(Request $request = null){
 		if($request && $request->page){
 			$view = view('components.albumrow', ['albums'=>$this->_albums]);
