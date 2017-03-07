@@ -2,9 +2,15 @@
 use Photos\Http\Controllers\UploadController; 
 
 $photochuncks = [];
-$chunksize = intval(count($photos) / $cols);
-for($i = 0; $i < $cols; $i++) {
-	$photochuncks[] = $photos->slice($i * $chunksize, $chunksize);
+foreach($photos->chunk($cols) as $row){
+	$chunkcounter = 0;
+	foreach($row as $index=>$photo){
+		if(!isset($photochuncks[$chunkcounter])){
+			$photochuncks[$chunkcounter] = [];
+		}
+
+		$photochuncks[$chunkcounter++][] = $photo;
+	}
 }
 
 ?>
@@ -13,13 +19,21 @@ for($i = 0; $i < $cols; $i++) {
 
 @section('contents')
 
-<div id = "photosWrapper" class="container fs-album-wrapper">
-@foreach($photochuncks as $row)
-<div class="photo-col" style="width: {{ 1 / $cols * 100 }}%;">
-	@foreach($row as $photo)
-		<div><img src="{{ $photo->getImage(UploadController::DRIVER_MD) }}"></div>
+<section id = "photosWrapper" class="container fs-album-wrapper">
+	@foreach($photochuncks as $row)
+		<div class="photo-col col-sm-{{ intval(12 / $cols) }}">
+			@foreach($row as $photo)
+				<div class="imgwrapper">
+					<img src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
+					<div class ="imgoverlay">
+						<a href="#">{{ $photo->albumo->name }}</a>
+						<a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+						<a href="#"><i class="fa fa-download" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			@endforeach
+		</div>
 	@endforeach
-</div>@endforeach
-</div>
+</section>
 
 @endsection

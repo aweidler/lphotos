@@ -5,6 +5,7 @@ namespace Photos;
 use Illuminate\Database\Eloquent\Model;
 use Photos\Http\Controllers\UploadController;
 
+
 class Fileentry extends Model
 {
 	protected $fillable = ['hash'];
@@ -20,6 +21,10 @@ class Fileentry extends Model
 		else{
 			return url('img/'.UploadController::DRIVER_FL.'/'.$this->filename);
 		}
+	}
+
+	public function albumo(){
+		return $this->belongsTo('Photos\Album', 'album');
 	}
 
 	public function widthForHeight($height, $from = UploadController::DRIVER_MD){

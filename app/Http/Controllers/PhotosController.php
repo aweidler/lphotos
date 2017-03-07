@@ -29,7 +29,7 @@ class PhotosController extends MainController
 			$files = Fileentry::orderBy('album')->get();
 		}
 		else{
-			$files = Fileentry::orderBy('created_at', 'DESC')->get();
+			$files = Fileentry::with('albumo')->orderBy('created_at', 'DESC')->get();
 		}
 		return $files;
 	}

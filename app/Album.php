@@ -14,8 +14,10 @@ class Album extends Model
 
 	public function groupedFiles(){
 		$files = $this->allFiles();
-
-		
 	}
+
+    public function files(){
+		return $this->hasMany('Photos\Fileentry', 'album');
+    }
 
 }
