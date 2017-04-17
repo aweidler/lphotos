@@ -27,6 +27,9 @@ return [
 			every photo you find on this website is free and you may download
 			as many as you like. Feel free to contact me if you have any comments or questions.'
 	],
+	'photos' => [
+		'in' => 'in'
+	],
 	'upload' => [
 		'addalbum' => 'Add an Album',
 		'uploadphoto' => 'Upload Photos'

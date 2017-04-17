@@ -20,10 +20,14 @@
 		text-align: center;
 		width: 100%;
 		position: relative;
+
+		&:hover div.imgoverlay{
+			opacity: 1.0;
+		}
 	}
 
 	div.imgoverlay{
-		border-top: 1px solid #333;
+		border-top: 1px solid #999;
 		box-sizing: border-box;
 		height: 40px;
 		width: calc(100% - 16px);
@@ -31,13 +35,27 @@
 		text-align: right;
 		bottom: 6px;
 		font-size: 16pt;
-		background-color: rgba(255, 255, 255, 0.7);
+		background-color: rgba(255, 255, 255, 0.85);
+		opacity: 0.0;
 
-		@include stroke(1, white);
+		transition: opacity 0.33s;
+
+		@include stroke(0.5, white);
 
 		a{
 			margin-right: 15px;
 			vertical-align: middle;
+		}
+
+		a.albumname{
+			float: left;
+			margin: 8px 14px;
+			font-size: 12pt;
+
+			span{
+				// color: #ccc;
+				// font-size: 10pt;
+			}
 		}
 	}
 

@@ -23,8 +23,8 @@ class Fileentry extends Model
 		}
 	}
 
-	public function albumo(){
-		return $this->belongsTo('Photos\Album', 'album');
+	public function album(){
+		return $this->belongsTo('Photos\Album', 'album_id');
 	}
 
 	public function widthForHeight($height, $from = UploadController::DRIVER_MD){

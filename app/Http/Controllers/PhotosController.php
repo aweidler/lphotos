@@ -26,10 +26,10 @@ class PhotosController extends MainController
 			$files = Fileentry::inRandomOrder()->get();
 		}
 		else if($by == self::BY_ALBUM){
-			$files = Fileentry::orderBy('album')->get();
+			$files = Fileentry::orderBy('album_id')->get();
 		}
 		else{
-			$files = Fileentry::with('albumo')->orderBy('created_at', 'DESC')->get();
+			$files = Fileentry::with('album')->orderBy('created_at', 'DESC')->get();
 		}
 		return $files;
 	}

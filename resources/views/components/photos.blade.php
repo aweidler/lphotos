@@ -26,7 +26,7 @@ foreach($photos->chunk($cols) as $row){
 				<div class="imgwrapper">
 					<img src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
 					<div class ="imgoverlay">
-						<a href="#">{{ $photo->albumo->name }}</a>
+						<a class = "albumname" href="#"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span>&nbsp;{{ $photo->album->name }}</a>
 						<a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
 						<a href="#"><i class="fa fa-download" aria-hidden="true"></i></a>
 					</div>

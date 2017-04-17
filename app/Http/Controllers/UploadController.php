@@ -84,7 +84,7 @@ class UploadController extends MainController
 	public function deleteFile(Request $request){
 		$myFile = Fileentry::find($request->id);
 		if($myFile){
-			$album = $myFile->album;
+			$album = $myFile->album_id;
 
 			// remove all image refs
 			foreach(array(self::DRIVER_FL) + array_keys(self::$IMAGE_SIZES) as $storage){
@@ -156,7 +156,7 @@ class UploadController extends MainController
 					$entry->filename = $newnameExtended;
 					$entry->mime = $mimetype;
 					$entry->original_filename = $file->getClientOriginalName();
-					$entry->album = $inalbum->id;
+					$entry->album_id = $inalbum->id;
 					$entry->size = File::size($file);
 					$entry->save();
 

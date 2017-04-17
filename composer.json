@@ -11,7 +11,8 @@
 		"php": ">=5.5.38",
 		"laravel/framework": "5.2.*",
 		"laravelcollective/html": "^5.2.0",
-		"intervention/image": "^2.3"
+		"intervention/image": "^2.3",
+		"doctrine/dbal": "^2.5"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",
