@@ -36,6 +36,11 @@ class PhotosController extends MainController
 
 	public function index(Request $request = null){
 		$files = $this->getPhotos($request->by);
-		return view('components.photos', ['active' => 'photos', 'photos'=>$files, 'cols'=>self::COLS]);
+		$sorts = [self::BY_DATE => "Date", self::BY_ALBUM => "Album", self::BY_RANDOM => "Random"];
+		return view('components.photos', ['active' => 'photos', 
+										  'photos'=>$files, 
+										  'cols'=>self::COLS, 
+										  'sorts' => $sorts,
+										  'selectedSort' => isset($sorts[$request->by]) ? $request->by : self::BY_DATE ]);
 	}
 }

@@ -1,0 +1,94 @@
+$dropdownWidth: 150px;
+
+.wrapper-dropdown {
+	/* Size and position */
+	display: inline-block;
+	position: relative; /* Enable absolute positioning for children and pseudo elements */
+	width: $dropdownWidth;
+	margin: 0 auto;
+	padding: 10px 15px;
+
+	/* Styles */
+	background: #fff;
+	border: 1px solid #999;
+	border-left: 5px solid #999;
+	cursor: pointer;
+	outline: none;
+	text-align: left;
+}
+
+.wrapper-dropdown:after {
+	content: "";
+	width: 0;
+	height: 0;
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	margin-top: -3px;
+	border-width: 6px 6px 0 6px;
+	border-style: solid;
+	border-color: grey transparent;
+}
+
+.wrapper-dropdown .dropdown {
+  /* Size & position */
+	position: absolute;
+	top: 100%;
+	left: -5px;
+	right: 0px;
+	min-width: $dropdownWidth;
+
+	/* Styles */
+	background: white;
+	transition: all 0.1s ease-out;
+	list-style: none;
+	border: 1px solid #999;
+	border-top: none;
+	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.25);
+
+	/* Hiding */
+	opacity: 0;
+	pointer-events: none;
+	z-index: 101;
+	padding-left: 0;
+
+	li{
+
+		a{
+			display: block;
+			text-decoration: none;
+			color: #333;
+			border-left: 4px solid;
+			padding: 10px;
+			transition: all 0.3s ease-out;
+		}
+
+		i{
+			margin-right: 5px;
+			color: inherit;
+			vertical-align: middle;
+		}
+	}
+
+	@each $aperture-color in $icon-aperture-colors{
+		$i: index($icon-aperture-colors, $aperture-color);
+		li:nth-child(#{$i}) a{
+			border-color: $aperture-color;
+		}
+	}
+}
+
+/* Hover state */
+
+.wrapper-dropdown .dropdown li:hover a {
+	color: grey;
+}
+
+.wrapper-dropdown.active:after {
+	border-width: 0 6px 6px 6px;
+}
+
+.wrapper-dropdown.active .dropdown {
+	opacity: 1;
+	pointer-events: auto;
+}

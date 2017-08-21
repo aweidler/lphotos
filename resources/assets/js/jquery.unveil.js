@@ -58,4 +58,18 @@
 	return this;
   };
 
+  $.fn.hitsBottom = function(callback, threshold){
+  	var $this = $(this);
+  	threshold = threshold || 0;
+  	$(window).on('scroll resize', function(e){
+  		if(didHitBottom(threshold)){
+  			console.log('hit the bottom');
+  			if(typeof callback === 'function'){
+  				callback.call(window, threshold);
+  			}
+  			$this.trigger('bottomhit');
+  		}
+  	});
+  };
+
 })(window.jQuery || window.Zepto);

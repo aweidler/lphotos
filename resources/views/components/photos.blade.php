@@ -13,24 +13,29 @@ foreach($photos->chunk($cols) as $row){
 	}
 }
 
+$myurl = action('PhotosController@index');
+
 ?>
 @extends('layouts.main')
 
 
 @section('contents')
 
+<section id="photosSorter" class="container">
+	<label for="droper" style="color: #999; margin-right: 12px;">Sort By</label>
+	<div id="droper" class="wrapper-dropdown"><span>{{ $sorts[$selectedSort] }}</span>
+		<ul class="dropdown">
+			@foreach($sorts as $sort=>$sortdisplay)
+				<li><a href="{{ $myurl.'?by='.$sort }}">{{ $sortdisplay }}</a></li>
+			@endforeach
+		</ul>
+	</div>
+</section>
 <section id = "photosWrapper" class="container fs-album-wrapper">
 	@foreach($photochuncks as $row)
 		<div class="photo-col col-sm-{{ intval(12 / $cols) }}">
 			@foreach($row as $photo)
-				<div class="imgwrapper">
-					<img src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
-					<div class ="imgoverlay">
-						<a class = "albumname" href="#"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span>&nbsp;{{ $photo->album->name }}</a>
-						<a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-						<a href="#"><i class="fa fa-download" aria-hidden="true"></i></a>
-					</div>
-				</div>
+				@include('components.photo', ['photo' => $photo])
 			@endforeach
 		</div>
 	@endforeach

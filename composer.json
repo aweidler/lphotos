@@ -8,7 +8,7 @@
 		"email": "austin.weidler@gmail.com"
 	},
 	"require": {
-		"php": ">=5.5.38",
+		"php": ">=5.5.34",
 		"laravel/framework": "5.2.*",
 		"laravelcollective/html": "^5.2.0",
 		"intervention/image": "^2.3",

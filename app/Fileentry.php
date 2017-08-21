@@ -11,6 +11,11 @@ class Fileentry extends Model
 	protected $fillable = ['hash'];
 	protected $table = 'file_entries';
 
+	public function getInfo(){
+		$path = $this->getImageOnDisk(UploadController::DRIVER_FL);
+		return exif_read_data($path, 0, true);
+	}
+
 	public function getImage($from = UploadController::DRIVER_MD){
 		if(file_exists($this->getImageOnDisk($from))){
 			return url('img/'.$from.'/'.$this->filename);

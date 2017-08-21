@@ -5,6 +5,7 @@
 @import "variables";
 @import "mixins";
 @import "fonts";
+@import "styles";
 @import "navbar";
 @import "footer";
 @import "carousel";
@@ -29,6 +30,7 @@ body{
 a{
 	color: #666;
 	text-decoration: none;
+	cursor: pointer;
 }
 a:hover{
 	@include anim-color-changing(1.5s, random(length($icon-aperture-colors)));
@@ -37,4 +39,8 @@ a:hover{
 
 #main_content{
 	margin-top: calc(#{$contentOffset} + #{$gradientBarSize}); // 0.2 is the height of the gradient
+}
+
+.noselect{
+	user-select: none;
 }
