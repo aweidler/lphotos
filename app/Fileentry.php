@@ -28,6 +28,14 @@ class Fileentry extends Model
 		}
 	}
 
+	public function imageSize($from = UploadController::DRIVER_MD){
+		$file = $this->getImageOnDisk($from);
+		if($file){
+			return getimagesize($file);
+		}
+		return null;
+	}
+
 	public function album(){
 		return $this->belongsTo('Photos\Album', 'album_id');
 	}

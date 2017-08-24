@@ -15,6 +15,7 @@ else{
 
 $date = date('m/d/Y  h:i a', strtotime($einfo['DateTimeOriginal']));// preg_replace('/:/', '-', $einfo['DateTimeOriginal'], 2);
 
+//$size = $photo->imageSize(UploadController::DRIVER_MD);
 ?>
 
 <div class="imgwrapper">
@@ -38,7 +39,7 @@ $date = date('m/d/Y  h:i a', strtotime($einfo['DateTimeOriginal']));// preg_repl
 	<div class ="imgoverlay noselect">
 		<a class = "albumname" href="#"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span>&nbsp;{{ $photo->album->name }}</a>
 		<a class="toggle-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-		<a href="#"><i class="fa fa-download" aria-hidden="true"></i></a>
+		<a href="{{ action('PhotosController@download', $photo->id) }}"><i class="fa fa-download" aria-hidden="true"></i></a>
 		<a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
 	</div>
 </div>

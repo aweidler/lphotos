@@ -1,4 +1,3 @@
-
 var footerheight;
 function getDocHeight() {
 	if(!footerheight){
@@ -12,8 +11,9 @@ function getDocHeight() {
 	) - footerheight;
 }
 
-function didHitBottom(){
-	return ($(window).scrollTop() + $(window).height() >= getDocHeight());
+function didHitBottom(threshold){
+	threshold = threshold || 0;
+	return (threshold + $(window).scrollTop() + $(window).height() >= getDocHeight());
 }
 
 var isBreakPoint = function (bp) {

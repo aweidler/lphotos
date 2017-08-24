@@ -13,13 +13,16 @@
 @import "upload";
 @import "albums";
 @import "photos";
+@import "viewer";
 
 // 3rd party
+@import "../../../node_modules/photoswipe/dist/photoswipe";
+// @import "../../../node_modules/photoswipe/dist/default-skin/default-skin";
 
 // Global SCSS styles
 
-body, html{
-
+html{
+	background-color: $navbarBackground;
 }
 
 body{

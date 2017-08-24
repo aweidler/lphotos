@@ -6,6 +6,9 @@ $(function(){
 	var canloadnext = true;
 
 	var $albumWrapper = $('#albumWrapper');
+	if(!$albumWrapper.length){
+		return false; // only do the following if we are on the albums page
+	}
 
 	$.extend($.expr[':'], { 
 		inview: function(el){
@@ -81,6 +84,7 @@ $(function(){
 		}
 	}
 
+	// TODO: replace with generic hitbottom filter
 	var pageNumber = 2;
 	$(window).scroll(function() {
 		if(didHitBottom()) {

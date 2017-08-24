@@ -14,12 +14,13 @@ foreach($photos->chunk($cols) as $row){
 }
 
 $myurl = action('PhotosController@index');
-
 ?>
 @extends('layouts.main')
 
 
 @section('contents')
+
+@include('components.viewer')
 
 <section id="photosSorter" class="container">
 	<label for="droper" style="color: #999; margin-right: 12px;">Sort By</label>
@@ -31,7 +32,7 @@ $myurl = action('PhotosController@index');
 		</ul>
 	</div>
 </section>
-<section id = "photosWrapper" class="container fs-album-wrapper">
+<section id = "photosWrapper" data-seed="{{ $seed }}" data-selectedsort="{{ $selectedSort }}" class="container fs-album-wrapper">
 	@foreach($photochuncks as $row)
 		<div class="photo-col col-sm-{{ intval(12 / $cols) }}">
 			@foreach($row as $photo)

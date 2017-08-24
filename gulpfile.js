@@ -22,7 +22,9 @@ var paths = {
 		'mysass': 'resources/assets/sass/app.scss',
 		'venderjs': [
 			'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', 
-			'node_modules/jquery/dist/jquery.min.js'
+			'node_modules/jquery/dist/jquery.min.js',
+			'node_modules/photoswipe/dist/photoswipe.min.js',
+			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 		],
 		'myjs': 'resources/assets/js/**',
 		'fonts': {

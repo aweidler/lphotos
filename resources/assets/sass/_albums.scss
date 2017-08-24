@@ -70,7 +70,7 @@ $scrollscale: 10px;
 		font-size: $colfontsize;
 		cursor: pointer;
 		top: 0;
-		opacity: 0.5;
+		opacity: 0.75;
 		transition: background-color 0.3s, opacity 0.3s;
 
 		@media #{$res-sml} {

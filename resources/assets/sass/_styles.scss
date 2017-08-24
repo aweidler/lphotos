@@ -68,6 +68,11 @@ $dropdownWidth: 150px;
 			color: inherit;
 			vertical-align: middle;
 		}
+
+		&:hover{
+			background-color: #f3f3f3;
+		}
+		transition: background-color 0.3s;
 	}
 
 	@each $aperture-color in $icon-aperture-colors{
