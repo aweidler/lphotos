@@ -152,7 +152,9 @@ gulp.task('_scripts', function(){
 			.pipe(concat('app.js'))
 			.pipe(gulp.dest(paths.out.js))
 			.pipe(rename({suffix: '.min'}))
-			.pipe(uglify())
+			.pipe(uglify({
+				compressor: {drop_debugger: false}
+			}))
 			.pipe(gulp.dest(paths.out.js))
 			.pipe(notify({
 				message: 'Scripts compiled!'
