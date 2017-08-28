@@ -17,6 +17,10 @@
 			<div class="pswp__item"></div>
 		</div>
 
+		<div class="pswp__info">
+			
+		</div>
+
 		<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
 		<div class="pswp__ui pswp__ui--hidden">
 
@@ -39,7 +43,7 @@
 				</button>
 
 				<button class="pswp__button pswp__button--album" title="Go to Album">
-					<i class="fa fa-folder-open-o" aria-hidden="true"></i><span class="noselect">Album</span>
+					<i class="fa fa-folder-open-o" aria-hidden="true"></i><span class="noselect viewer-album">Album</span>
 				</button>
 
 				<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->

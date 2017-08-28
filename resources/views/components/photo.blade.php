@@ -43,7 +43,7 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 	<div class ="imgoverlay noselect">
 		<a class = "albumname" href="#"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span>&nbsp;{{ $photo->album->name }}</a>
 		<a class="toggle-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-		<a href="{{ action('PhotosController@download', $photo->id) }}"><i class="fa fa-download" aria-hidden="true"></i></a>
-		<a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+		<a class="toggle-download" href="{{ action('PhotosController@download', $photo->id) }}" download><i class="fa fa-download" aria-hidden="true"></i></a>
+		<a class="toggle-zoom"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
 	</div>
 </div>

@@ -69,11 +69,13 @@ $(function(){
 				$img.data('col', colindex);
 				_colImages[colindex].push($img);
 				images.push($img);
-				items.push({
+				var pswpitem = {
 					src: $img.data('path'),
 					w: $img.data('lwidth'),
 					h: $img.data('lheight'),
-				});
+				};
+
+				items.push(pswpitem);
 
 				var height = parseInt($img.data('height'));
 				$shortest.data('height', parseInt($shortest.data('height')) + height);
@@ -90,22 +92,80 @@ $(function(){
 		return false;
 	}
 
+	var $pswpElement = $('#pswp');
+	var $pswpAlbumElement = $pswpElement.find('.viewer-album:first');
+	var $pswpInfoElement = $pswpElement.find('.pswp__info:first');
+	var pswp = null;
+	function openViewer(index){
+		// define options (if needed)
+		var options = {
+			index: index,
+			loop: false,
+			bgOpacity: 1,
+			timeToIdle: 3000,
+			barsSize: {top:0, bottom:0},
+		};
+
+		// Initializes and opens PhotoSwipe
+		pswp = new PhotoSwipe(document.getElementById('pswp'), PhotoSwipeUI_Default, items, options);
+
+		$nextBtn = $('.pswp__button--arrow--right', pswp.template);
+		$prevBtn = $('.pswp__button--arrow--left', pswp.template);
+		pswp.listen('beforeChange', function() {
+			if(this.getCurrentIndex() == this.items.length - 1 && canloadnext){
+				console.log('fetching page ' + pageNumber);
+				$nextBtn.hide();
+				fetchImages().done(function(){
+					pswp.invalidateCurrItems();
+					pswp.updateSize(true);
+					if(canloadnext){
+						$nextBtn.show();
+					}
+				});
+			}
+			else if(!canloadnext){
+				$nextBtn.toggle(this.getCurrentIndex() < this.items.length - 1);
+			}
+			$prevBtn.toggle(this.getCurrentIndex() > 0);
+		});
+
+		pswp.listen('afterChange', function() {
+			var index = pswp.getCurrentIndex();
+			if(images[index]){
+				var album = images[index].find('.albumname:first').text().trim();
+				$pswpAlbumElement.text(album);
+
+				var $info = images[index].find('.infowrapper:first').clone();
+				$info.addClass('info-viewer');
+				$info.css({display: 'block'});
+				$pswpInfoElement.html($info);
+			}
+		});
+
+		pswp.listen('destroy', function() {
+			pswp = null;
+		});
+
+		pswp.init();
+
+		if(images[index]){
+			viewerInfo(images[index].hasClass('infoup') ? 'show' : 'hide', 0);
+		}
+	}
+
 	var breakpoint = 786 - 33;
 	var isTiny = isBreakPoint(768);
 	function moveImages(){
 		if(isTiny){
-			console.log('going to tiny');
 			$($photoCols[0]).append(images);
 		}
 		else{
-			console.log('going to large');
 			$photoCols.each(function(i){
 				$(this).append(_colImages[i]);
 			});
 		}
 	}
 	$(window).on('resize', function(e){
-		console.log($(window).width())
 		if($(window).width() < breakpoint && !isTiny){
 			isTiny = true;
 			moveImages();
@@ -133,19 +193,54 @@ $(function(){
 		}
 	}
 
-	$photoWrapper.on('click', '.thumb', function(e){
-		e.stopPropagation();
-		var $img = $(this).parents('.imgwrapper:first');
-		// define options (if needed)
-		var options = {
-			index: $img.data('index'),
-			bgOpacity: 1,
-			barsSize: {top:0, bottom:0},
+	$pswpElement.on('click', '.pswp__button--download', function(e){
+		if(pswp){
+			var index = pswp.getCurrentIndex();
+			if(images[index]){
+				var ref = images[index].find('.toggle-download:first').attr('href');
+				if(ref){
+					document.location = ref;
+					return;
+				}
+			}
+		}
+		alert('Could not download image');
+	});
+
+	$pswpElement.on('click', '.pswp__button--info', function(e){
+		viewerInfo('toggle');
+	});
+
+	$pswpInfoElement.on('click', function(e){
+		viewerInfo('hide');
+	});
+
+	function viewerInfo(type, time){
+		if(typeof time === 'undefined'){
+			time = 100;
+		}
+		var callback = function(){
+			$pswpElement.toggleClass('freeze', $pswpInfoElement.is(':visible'));
+			$pswpElement.find('.pswp__button--info:first').toggleClass('active', $pswpInfoElement.is(':visible'));
 		};
 
-		// Initializes and opens PhotoSwipe
-		var pswp = new PhotoSwipe(document.getElementById('pswp'), PhotoSwipeUI_Default, items, options);
-		pswp.init();
+		if(pswp){
+			if(type == 'show'){
+				$pswpInfoElement.fadeIn(time, 'swing', callback);
+			}
+			else if(type == 'hide'){
+				$pswpInfoElement.fadeOut(time, 'swing', callback);
+			}
+			else{
+				$pswpInfoElement.fadeToggle(time, 'swing', callback);
+			}
+		}
+	}
+
+	$photoWrapper.on('click', '.thumb, .toggle-zoom', function(e){
+		e.stopPropagation();
+		var $img = $(this).parents('.imgwrapper:first');
+		openViewer($img.data('index'));
 	});
 
 	$photoWrapper.on('click', '.toggle-info', function(e){
