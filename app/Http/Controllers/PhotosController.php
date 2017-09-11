@@ -22,16 +22,25 @@ class PhotosController extends MainController
 		parent::__construct();
 	}
 
-	public function getPhotos($by = self::BY_DATE, $seed = ''){
-		$files = null;
+	public function getPhotos($by = self::BY_DATE, $album = null, $query = null, $seed = ''){
+		$files = Fileentry::with('album');
+
+		if($album){
+			$files = $files->where('album_id', '=', intval($album));
+		}
+		else if($query){
+			$files = $files->where('tags', 'LIKE', '%'.$query.'%');
+		}
+
+
 		if($by == self::BY_RANDOM){
-			$files = Fileentry::inRandomOrder($seed ? $seed : '')->paginate(self::TICKER_AMOUNT);
+			$files = $files->inRandomOrder($seed ? $seed : '')->paginate(self::TICKER_AMOUNT);
 		}
 		else if($by == self::BY_ALBUM){
-			$files = Fileentry::orderBy('album_id')->paginate(self::TICKER_AMOUNT);
+			$files = $files->orderBy('album_id')->paginate(self::TICKER_AMOUNT);
 		}
 		else{
-			$files = Fileentry::with('album')->orderBy('created_at', 'DESC')->paginate(self::TICKER_AMOUNT);
+			$files = $files->orderBy('created_at', 'DESC')->paginate(self::TICKER_AMOUNT);
 		}
 		return $files;
 	}
@@ -64,7 +73,11 @@ class PhotosController extends MainController
 
 	public function index(Request $request = null){
 		$seed = isset($request->seed) ? $request->seed : time();
-		$files = $this->getPhotos($request->by, $seed);
+		if($request->album){
+			$album = Album::find(intval($request->album));
+		}
+
+		$files = $this->getPhotos($request->by, $request->album, $request->q, $seed);
 
 		if($request->page){
 			$views = [];
@@ -77,11 +90,20 @@ class PhotosController extends MainController
 		}
 		else{
 			$sorts = [self::BY_DATE => "Date", self::BY_ALBUM => "Album", self::BY_RANDOM => "Random"];
+			$listlabel = 'All Photos';
+			if(isset($album) && $album){
+				$listlabel = $album->name.' Photos';
+			}
+			else if($request->q){
+				$listlabel = $request->q;
+			}
+
 			return view('components.photos', ['active' => 'photos', 
 											  'photos'=>$files, 
 											  'cols'=>self::COLS, 
 											  'sorts' => $sorts,
 											  'seed' => $seed,
+											  'listLabel' => $listlabel,
 											  'selectedSort' => isset($sorts[$request->by]) ? $request->by : self::BY_DATE ]);
 		}
 	}

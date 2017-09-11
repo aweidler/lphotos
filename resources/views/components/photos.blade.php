@@ -11,7 +11,11 @@ $myurl = action('PhotosController@index');
 
 <section id="photosSorter" class="container">
 	<div class="photos-header col-sm-7">
-		<h1>{{ $listLabel or 'All Photos' }}</h1>
+		<h1>
+			<a title="View All Photos" href="{{ $myurl.($selectedSort ? '?by='.$selectedSort : '') }}">
+				{{ $listLabel or 'All Photos' }}
+			</a>
+		</h1>
 	</div>
 	<div class="dropdown-header col-sm-5">
 		<div class="dropdown-wrapper">
@@ -19,7 +23,7 @@ $myurl = action('PhotosController@index');
 			<div id="droper" class="wrapper-dropdown"><span>{{ $sorts[$selectedSort] }}</span>
 				<ul class="dropdown">
 					@foreach($sorts as $sort=>$sortdisplay)
-						<li><a href="{{ $myurl.'?by='.$sort }}">{{ $sortdisplay }}</a></li>
+						<li><a class="sort-select" data-sort="{{ $sort }}">{{ $sortdisplay }}</a></li>
 					@endforeach
 				</ul>
 			</div>

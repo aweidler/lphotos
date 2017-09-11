@@ -30,6 +30,73 @@ var isBreakPoint = function (bp) {
 	return w > min && w <= max
 }
 
+function setUrlParam(names, clears, hash){
+	var path = window.location.href;
+
+	path = path.split('#', 2);
+	var hasher = "";
+	if(path[1]){
+		hasher = "#" + path[1];
+	}
+	path = path[0];
+
+	var vars = path.split('?', 2);
+
+	for(var name in names){
+		val = encodeURIComponent(names[name]);
+
+		if(vars[1] && vars[1].length > 1){
+			if(path.search(name+'=') == -1){
+				var morethanone = '&';
+				if(vars[1].length < 2){
+					morethanone = '';
+				}
+
+				path += morethanone+name+'='+val;
+				vars = path.split('?', 2);
+			}
+			else{
+				var alls = vars[1].split('&');
+				for(var i=0; i<alls.length; i++){
+					var mine = alls[i].trim();
+					if(mine.indexOf(name+'=') == 0){
+						alls[i] = name+'='+val;
+						break;
+					}
+				}
+				vars[1] = alls.join('&');
+				path = vars[0]+'?'+vars[1];
+			}
+		}
+		else if(path.indexOf('?') != -1){
+			path += "&"+name+'='+val;
+		}
+		else{
+			path += "?"+name+'='+val;
+		}
+	}
+
+	if(clears){
+		var alls = vars[1].split('&');
+		var finals = [];
+		for(var i=0; i<alls.length; i++){
+			keep = true;
+			for(var j=0; j<clears.length; j++){
+				if(alls[i].indexOf(clears[j]) == 0){
+					keep = false;
+					break;
+				}
+			}
+			if(keep){
+				finals.push(alls[i]);
+			}
+		}
+		path = vars[0]+'?'+finals.join('&');
+	}
+
+	return path + (hash === false ? '' : hasher);
+}
+
 
 
 function DropDown(el) {

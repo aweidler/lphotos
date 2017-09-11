@@ -34,9 +34,11 @@ $(function(){
 			canloadnext = false;
 			return $.ajax({
 				type: 'GET',
-				url: './photos?by='+$photoWrapper.data('selectedsort')
-				+'&seed='+$photoWrapper.data('seed')
-				+'&page='+pageNumber,
+				url: setUrlParam({
+					'by': $photoWrapper.data('selectedsort'),
+					'seed': $photoWrapper.data('seed'),
+					'page': pageNumber,
+				}),
 				success: function(data){
 					if(placeImages(data)){
 						pageNumber++;
@@ -94,6 +96,7 @@ $(function(){
 
 	var $pswpElement = $('#pswp');
 	var $pswpAlbumElement = $pswpElement.find('.viewer-album:first');
+	var $pswpAlbumButton = $pswpElement.find('.pswp__button--album:first');
 	var $pswpInfoElement = $pswpElement.find('.pswp__info:first');
 	var pswp = null;
 	function openViewer(index){
@@ -103,6 +106,7 @@ $(function(){
 			loop: false,
 			bgOpacity: 1,
 			timeToIdle: 3000,
+			history: true,
 			barsSize: {top:0, bottom:0},
 		};
 
@@ -132,8 +136,13 @@ $(function(){
 		pswp.listen('afterChange', function() {
 			var index = pswp.getCurrentIndex();
 			if(images[index]){
-				var album = images[index].find('.albumname:first').text().trim();
-				$pswpAlbumElement.text(album);
+				var $album = images[index].find('.albumname:first');
+				$pswpAlbumElement.text($album.text().trim());
+				$pswpAlbumButton.off().on('click', function(e){
+					e.stopPropagation();
+					document.location = setUrlParam({'album': $album.data('album')}, false, false);
+					return false;
+				});
 
 				var $info = images[index].find('.infowrapper:first').clone();
 				$info.addClass('info-viewer');
@@ -237,6 +246,12 @@ $(function(){
 		}
 	}
 
+	$photoWrapper.on('click', '.albumname', function(e){
+		e.stopPropagation();
+		var album = parseInt($(this).data('album'));
+		document.location = setUrlParam({'album': album});
+	});
+
 	$photoWrapper.on('click', '.thumb, .toggle-zoom', function(e){
 		e.stopPropagation();
 		var $img = $(this).parents('.imgwrapper:first');
@@ -253,5 +268,11 @@ $(function(){
 		e.stopPropagation();
 		var $wrapper = $(this).parents('.imgwrapper:first');
 		$wrapper.infoup();
+	});
+
+	$('#droper').on('click', '.sort-select', function(e){
+		e.stopPropagation();
+		var by = parseInt($(this).data('sort'));
+		document.location = setUrlParam({'by': by});
 	});
 });
