@@ -31,11 +31,14 @@ $myurl = action('PhotosController@index');
 	</div>
 </section>
 <section id = "photosWrapper" data-seed="{{ $seed }}" data-selectedsort="{{ $selectedSort }}" class="container fs-album-wrapper">
+	<div class="noresults">{{ trans('aria.photos.noresults') }}</div>
+	<div class="img-cols">
 	@for($q = 0; $q < $cols; $q++)
 		<div class="photo-col col-sm-{{ intval(12 / $cols) }}" data-height="0">
 
 		</div>
 	@endfor
+	</div>
 </section>
 
 @endsection

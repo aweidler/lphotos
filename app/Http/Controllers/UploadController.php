@@ -81,6 +81,16 @@ class UploadController extends MainController
 		return $this->index();
 	}
 
+	public function saveFile(Request $request){
+		$myFile = Fileentry::find($request->file);
+		if($myFile){
+			$myFile->tags = $request->tags;
+			$myFile->save();
+			return 'File Saved';
+		}
+		return 'Could Not Find File';
+	}
+
 	public function deleteFile(Request $request){
 		$myFile = Fileentry::find($request->id);
 		if($myFile){
@@ -115,13 +125,15 @@ class UploadController extends MainController
 	public function save(Request $request){
 		$myalbum = Album::find($request->id);
 		if(isset($request->save)){
+			$myalbum->location = $request->location;
+			$myalbum->parent = $request->parent;
+			$myalbum->save();
+
 			$this->validate($request, [
 				'name' => 'unique:albums|max:100',
 			]);
 
 			$myalbum->name = $request->name;
-			$myalbum->location = $request->location;
-			$myalbum->parent = $request->parent;
 			$myalbum->save();
 		}
 		else if(isset($request->delete)){
@@ -136,7 +148,6 @@ class UploadController extends MainController
 			}
 			return $this->index($request);
 		}
-
 		return $this->index();
 	}
 

@@ -2,7 +2,10 @@
 
 @foreach($albums as $album)
 
-	<?php $myfiles = $album->allFiles(); ?>
+	<?php
+		$myfiles = $album->allFiles();
+		$albumurl = action('PhotosController@index', ['album' => $album->id]);
+	?>
 
 	@if($myfiles && count($myfiles))
 	<article class="albumrow">
@@ -16,7 +19,13 @@
 			@endforeach
 		</div>
 		<div class="righter pag-col"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-		<h2><a>{{ $album->name }}</a></h2>
+		<div class="album-info">
+			<h2><a href="{{ $albumurl }}" >{{ $album->name }}</a></h2>
+			<a href="{{ $albumurl }}" class="view-all">
+				{{ trans('aria.albums.viewall') }} 
+				<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+			</a>
+		</div>
 	</article>
 	@endif
 

@@ -1,0 +1,55 @@
+
+
+.abouter{
+	padding: 15px;
+	text-align: justify;
+
+	div{
+		display: inline-block;
+		vertical-align: top;
+		// min-height: 300px;
+
+		img{
+			max-width: 100%;
+			max-height: 100%;
+			border: 1px solid #ccc;
+			height: 300px;
+		}
+
+		i{
+			vertical-align: middle;
+			margin: 0 15px;
+			font-size: 60pt;
+			margin-top: 70px;
+
+			@media #{$res-med} {
+				font-size: 50pt;
+			}
+		}
+
+		&:not(.text){
+			text-align: center;
+		}
+	}
+}
+
+.about-icons{
+	margin-top: 30px;
+	text-align: center;
+
+	i{
+		font-style: normal;
+		font-size: 50pt;
+		display: inline-block;
+		margin: 0 15px;
+
+		@media #{$res-sml} {
+			font-size: 35pt;
+			margin: 0 10px;
+		}
+
+		&.fscanim{
+			@include anim-color-changing($speed: 1.2s);
+		}
+	}
+}

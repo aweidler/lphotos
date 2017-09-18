@@ -11,9 +11,9 @@
 			</div>
 			<div class="col-sm-6 right">
 				<ul>
-					<li><a href="">{{trans('aria.footer.terms')}}</a></li>
+					<li><a href="{{ url('/') }}">{{trans('aria.footer.home')}}</a></li>
 					<li>|</li>
-					<li><a href="">{{trans('aria.footer.private')}}</a></li>
+					<li><a href="{{ URL::asset('privacypolicy.htm') }}">{{trans('aria.footer.private')}}</a></li>
 				</ul>
 			</div>
 		</div>

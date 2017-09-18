@@ -37,6 +37,7 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 				<tr><td>Shutter</td><td>{{ $einfo['ExposureTime'] }}</td></tr>
 				<tr><td>Aperture</td><td>{{ $fnum }}</td></tr>
 				<tr><td>ISO</td><td>{{ $einfo['ISOSpeedRatings'] }}</td></tr>
+				<tr><td>Tags</td><td>{{ $photo->tags }}</td></tr>
 			</table>
 		</div>
 	</div>

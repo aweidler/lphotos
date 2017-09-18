@@ -3,13 +3,15 @@
 <?php
 	$urls = [
 		'albums' => action('AlbumController@index'),
-		'photos' => action('PhotosController@index')
+		'photos' => action('PhotosController@index'),
+		'about' => action('AboutController@index'),
+		'contact' => action('ContactController@index'),
 	];
 ?>
 
 <header>
 <nav class="navbar navbar-fixed-top">
-	<div class="container">
+	<div class="container nav-container">
 		<div class="navbar-header">
 		
 			<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" 
@@ -55,14 +57,14 @@
 					</a>
 				</li>
 				<li class="{{ isset($active) && $active == 'about' ? 'active' : '' }}">
-					<a href="#">{{ trans('aria.link.about') }}
+					<a href="{{ $urls['about'] }}">{{ trans('aria.link.about') }}
 					@if(isset($active) && $active == 'about')
 						<span class="sr-only">({{ trans('aria.current') }})</span>
 					@endif
 					</a>
 				</li>
 				<li class="{{ isset($active) && $active == 'contact' ? 'active' : '' }}">
-					<a href="#">{{ trans('aria.link.contact') }}
+					<a href="{{ $urls['contact'] }}">{{ trans('aria.link.contact') }}
 					@if(isset($active) && $active == 'contact')
 						<span class="sr-only">({{ trans('aria.current') }})</span>
 					@endif
@@ -70,6 +72,12 @@
 				</li>
 			</ul>
 		</div>
+		<form id="searchWrapper" method="GET" action="{{ url('/photos') }}">
+			<input name="q" type="text" placeholder="Search Photos" maxlength="80">
+			<button type="submit" form="searchWrapper">
+				<i class="fa fa-search" aria-hidden="true"></i>
+			</button>
+		</form>
 	</div>
 </nav>
 </header>

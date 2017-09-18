@@ -100,12 +100,34 @@ $scrollscale: 10px;
 		right: 0;
 	}
 
+	.album-info{
+		margin: 0;
+		padding: 10px 0px;
+		color: #333;
+		background-color: #fdfdfd;
+		position: relative;
+
+		> a{
+			float: right;
+			margin-right: 20px;
+			font-family: $fontB;
+			margin-top: 4px;
+			font-size: 12pt;
+
+			i{
+				font-size: 16pt;
+			}
+		}
+	}
+
 	h2{
 		font-family: $fontB;
 		margin: 0;
-		padding: 10px 0px 10px 20px;
-		color: #333;
-		background-color: #fdfdfd;
+		display: inline-block;
+
+		&:first-child{
+			margin-left: 20px;
+		}
 
 		a{
 			cursor: pointer;

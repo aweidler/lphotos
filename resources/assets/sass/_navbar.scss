@@ -8,6 +8,61 @@ $fwidth: $radiusScale * 0.5em;
 $fheight: $radiusScale * 2em;
 $ffinalHeight: $fheight;
 
+.nav-container{
+	position: relative;
+
+	#searchWrapper{
+		position: absolute;
+		right: 0;
+		top: 5px;
+		height: 36px;
+
+		input{
+			height: 100%;
+			width: calc(100% - 32px);
+			padding: 0 8px;
+			outline: none;
+			border: 1px solid #ccc;
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+
+			@media #{$res-sml} {
+				
+			}
+		}
+
+		button{
+			display: block;
+			position: absolute;
+			height: 100%;
+			right: 0;
+			top: 0;
+			background-color: white;
+			border: 1px solid #ccc;
+			outline: none;
+			width: 35px;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			font-size: 12pt;
+			color: #666;
+
+			&:hover{
+				background-color: #eee;
+			}
+		}
+
+		width: 250px;
+
+		@media #{$res-med} {
+			width: 200px;
+		}
+
+		@media #{$res-sml} {
+			width: calc(100% - 200px);
+			left: 120px;
+		}
+	}
+}
 
 .alogo-wrapper{
 	$wrapper-index: 1;

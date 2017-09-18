@@ -12,7 +12,7 @@
 			<div class="form-group curalbum">
 				<input name="name" type="text" maxlength="100" autocomplete="off" value="{{ $album->name }}">
 				<input name="location" type="text" placeholder="Location (City, Province)" maxlength="500" autocomplete="off" value="{{ $album->location }}">
-				{!! Form::select('parent', array(null=>'No Parent') + $albumkeys, $album->parent, array('id'=>'parent', 'autocomplete'=>'off')) !!}
+				{{-- {!! Form::select('parent', array(null=>'No Parent') + $albumkeys, $album->parent, array('id'=>'parent', 'autocomplete'=>'off')) !!} --}}
 				<button type="submit" name="save" class="btn btn-default btn-sm">{{trans('pagination.save')}}</button>
 				<button type="submit" name="delete" class="btn btn-danger btn-sm">{{trans('pagination.delete')}}</button>
 			</div>
@@ -24,7 +24,7 @@
 		<div class="form-group newalbum">
 			<input type="text" placeholder="Name" name="newalbum" maxlength="100" autocomplete="off">
 			<input type="text" placeholder="Location (City, Province)" name="newlocation" maxlength="500" autocomplete="off">
-			{!! Form::select('newparent', array(null=>'No Parent') + $albumkeys, null, array('id'=>'newparent', 'autocomplete'=>'off')) !!}
+			{{-- {!! Form::select('newparent', array(null=>'No Parent') + $albumkeys, null, array('id'=>'newparent', 'autocomplete'=>'off')) !!} --}}
 			<button type="submit" class="btn btn-success btn-sm">{{trans('pagination.add')}}</button>
 		</div>
 	</form>
@@ -48,7 +48,7 @@
 	@endif
 
 	@foreach($files as $file)
-		<div class="imagecell">
+		<div class="imagecell" data-name="{{ $file->filename }}" data-file="{{ $file->id }}" data-token="{{ csrf_token() }}">
 			<img src="{{ url('img/small/'.$file->filename) }}" >
 			<div class = 'labels'>
 				@if(file_exists(storage_path('photos/small/'.$file->filename)))
@@ -71,9 +71,19 @@
 				@endif
 			</div>
 
+			<div class="tags">
+				<input class='tags-text' type="text" placeholder="tags" maxlength="500" value="{{ $file->tags }}" />
+			</div>
+
 			<div class="options">
+				<a class='save-tags' tabindex="-1">
+					<i class="fa fa-floppy-o" aria-hidden="true"></i>
+				</a>
+				<a class="auto-tags" tabindex="-1">
+					<i class="fa fa-tag" aria-hidden="true"></i>
+				</a>
 				<span>{{ $file->hash }}</span>
-				<a href="{{ url('aupload/fdelete/'.$file->id) }}">
+				<a href="{{ url('aupload/fdelete/'.$file->id) }}" tabindex="-1">
 					<i class="fa fa-trash-o" aria-hidden="true"></i>
 				</a>
 			</div>
@@ -81,5 +91,6 @@
 	@endforeach
 
 </div>
+<script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
 
 @endsection

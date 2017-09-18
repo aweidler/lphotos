@@ -29,7 +29,11 @@ class PhotosController extends MainController
 			$files = $files->where('album_id', '=', intval($album));
 		}
 		else if($query){
-			$files = $files->where('tags', 'LIKE', '%'.$query.'%');
+			$search = '%'.$query.'%';
+			$files = $files->join('Albums', 'file_entries.album_id', '=', 'Albums.id')
+						   ->where('file_entries.tags', 'LIKE', $search)
+						   ->orWhere('Albums.name', 'LIKE', $search)
+						   ->orWhere('Albums.location', 'LIKE', $search);
 		}
 
 
@@ -37,10 +41,10 @@ class PhotosController extends MainController
 			$files = $files->inRandomOrder($seed ? $seed : '')->paginate(self::TICKER_AMOUNT);
 		}
 		else if($by == self::BY_ALBUM){
-			$files = $files->orderBy('album_id')->paginate(self::TICKER_AMOUNT);
+			$files = $files->orderBy('file_entries.album_id')->paginate(self::TICKER_AMOUNT);
 		}
 		else{
-			$files = $files->orderBy('created_at', 'DESC')->paginate(self::TICKER_AMOUNT);
+			$files = $files->orderBy('file_entries.created_at', 'DESC')->paginate(self::TICKER_AMOUNT);
 		}
 		return $files;
 	}
@@ -95,7 +99,7 @@ class PhotosController extends MainController
 				$listlabel = $album->name.' Photos';
 			}
 			else if($request->q){
-				$listlabel = $request->q;
+				$listlabel = "\"".$request->q."\"";
 			}
 
 			return view('components.photos', ['active' => 'photos', 

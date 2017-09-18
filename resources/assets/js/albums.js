@@ -1,5 +1,5 @@
 $(function(){
-	var END_SCROLL = 2500;
+	var END_SCROLL = 1500;
 	var END_FADE = 500;
 	var END_FADE_MOBILE = 150;
 	var LAZY_THRESHOLD = 400;

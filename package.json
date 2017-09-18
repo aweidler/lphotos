@@ -27,5 +27,8 @@
     "laravel-elixir-delete": "^1.0.1",
     "pump": "^1.0.1",
     "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "clarifai": "^2.4.0"
   }
 }

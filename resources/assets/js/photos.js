@@ -91,6 +91,9 @@ $(function(){
 
 			return true;
 		}
+		else if(!images.length){
+			$photoWrapper.find('.noresults:first').show();
+		}
 		return false;
 	}
 
