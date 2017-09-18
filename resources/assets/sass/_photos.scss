@@ -74,7 +74,9 @@
 			tr td:first-child{
 				font-weight: bold;
 				border-right: none;
-				padding-left: 8px;
+				padding: 0 8px;
+				vertical-align: top;
+				text-align: left;
 			}
 			tr td{
 				padding: 2px;
