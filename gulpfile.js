@@ -1,4 +1,9 @@
 var gulp = require('gulp'),
+	gutil = require('gulp-util'),
+	argv = require('minimist')(process.argv),
+	gulpif = require('gulp-if'),
+	prompt = require('gulp-prompt'),
+	rsync = require('gulp-rsync'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	cleancss = require('gulp-clean-css'),
@@ -12,6 +17,7 @@ var gulp = require('gulp'),
 	del = require('del'),
 	bust = require('gulp-buster'),
 	watch = require('gulp-watch'),
+	merge = require('merge-stream'),
 	runSequence = require('run-sequence');
 
 // config vars
@@ -203,7 +209,6 @@ gulp.task('watch', function() {
 
 	gulp.watch(paths.in.buster, ['buster']).on('change', livereload.changed);
 });
-
 
 
 /**
