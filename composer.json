@@ -44,12 +44,10 @@
 		"post-install-cmd": [
 			"Illuminate\\Foundation\\ComposerScripts::postInstall",
 			"php artisan optimize",
-			"yes | php artisan migrate"
 		],
 		"post-update-cmd": [
 			"Illuminate\\Foundation\\ComposerScripts::postUpdate",
 			"php artisan optimize",
-			"yes | php artisan migrate"
 		]
 	},
 	"config": {
