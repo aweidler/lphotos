@@ -95,23 +95,7 @@ class UploadController extends MainController
 		$myFile = Fileentry::find($request->id);
 		if($myFile){
 			$album = $myFile->album_id;
-
-			// remove all image refs
-			foreach(array(self::DRIVER_FL) + array_keys(self::$IMAGE_SIZES) as $storage){
-				if (Storage::disk($storage)->exists($myFile->filename)){
-					Storage::disk($storage)->delete($myFile->filename);
-				}
-			}
-
-			// remove CR2 and xmp refs
-			if (Storage::disk(self::DRIVER_XMP)->exists($myFile->hash.'.CR2')){
-				Storage::disk(self::DRIVER_XMP)->delete($myFile->hash.'.CR2');
-			}
-
-			if (Storage::disk(self::DRIVER_XMP)->exists($myFile->hash.'.xmp')){
-				Storage::disk(self::DRIVER_XMP)->delete($myFile->hash.'.xmp');
-			}
-
+			$this->unlinkFile($myFile);
 			$myFile->delete();
 
 			$request->id = $album;
@@ -120,6 +104,24 @@ class UploadController extends MainController
 			$request->id = null;
 		}
 		return $this->index($request);
+	}
+
+	private function unlinkFile(Fileentry $myFile){
+		// remove all image refs
+		foreach(array(self::DRIVER_FL) + array_keys(self::$IMAGE_SIZES) as $storage){
+			if (Storage::disk($storage)->exists($myFile->filename)){
+				Storage::disk($storage)->delete($myFile->filename);
+			}
+		}
+
+		// remove CR2 and xmp refs
+		if (Storage::disk(self::DRIVER_XMP)->exists($myFile->hash.'.CR2')){
+			Storage::disk(self::DRIVER_XMP)->delete($myFile->hash.'.CR2');
+		}
+
+		if (Storage::disk(self::DRIVER_XMP)->exists($myFile->hash.'.xmp')){
+			Storage::disk(self::DRIVER_XMP)->delete($myFile->hash.'.xmp');
+		}
 	}
 
 	public function save(Request $request){
@@ -137,6 +139,11 @@ class UploadController extends MainController
 			$myalbum->save();
 		}
 		else if(isset($request->delete)){
+			$photoController = new PhotosController();
+			$fileEntries = $photoController->getPhotos(PhotosController::BY_ALBUM, $myalbum->id);
+			foreach($fileEntries as $fileEntry){
+				$this->unlinkFile($fileEntry);
+			}
 			$myalbum->delete();
 		}
 		else if(isset($request->photoup)){

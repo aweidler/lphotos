@@ -13,6 +13,6 @@ return [
 	 *
 	 */
 	
-	'default_title' => 'Photos'
+	'default_title' => 'Photos by Austin Weidler'
 
 ];

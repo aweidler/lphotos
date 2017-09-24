@@ -372,10 +372,19 @@ $(function(){
 	$polars.fly(true);
 
 	if($polars.length){
+
+		// var $loadedPolars = $([]);
+		// $polars.each(function(i){
+		// 	$(this).one('load', function(){
+		// 		$loadedPolars.add($(this));
+		// 	});
+		// });
+
 		var ihandle;
 		var curz = 0;
 		(function sanimate(){
-			$cur = false;
+			var $cur = false;
+			var total = 0;
 			do{
 				if(pointer > $polars.length - 1){
 					pointer = 0;
@@ -385,6 +394,11 @@ $(function(){
 				if(cur.complete){
 					$cur = $(cur);
 				}
+				
+				if(total++ >= $polars.length){
+					break;
+				}
+				
 				pointer++;
 
 			} while(!$cur);
