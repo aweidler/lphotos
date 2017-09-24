@@ -108,7 +108,9 @@ class UploadController extends MainController
 
 	private function unlinkFile(Fileentry $myFile){
 		// remove all image refs
-		foreach(array(self::DRIVER_FL) + array_keys(self::$IMAGE_SIZES) as $storage){
+		$keys = array_keys(self::$IMAGE_SIZES);
+		$keys[] = self::DRIVER_FL;
+		foreach($keys as $storage){
 			if (Storage::disk($storage)->exists($myFile->filename)){
 				Storage::disk($storage)->delete($myFile->filename);
 			}
