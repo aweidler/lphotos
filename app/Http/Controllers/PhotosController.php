@@ -44,7 +44,7 @@ class PhotosController extends MainController
 			$files = $files->orderBy('file_entries.album_id')->paginate(self::TICKER_AMOUNT);
 		}
 		else{
-			$files = $files->orderBy('file_entries.created_at', 'DESC')->paginate(self::TICKER_AMOUNT);
+			$files = $files->orderBy('file_entries.shot_at', 'DESC')->paginate(self::TICKER_AMOUNT);
 		}
 		return $files;
 	}

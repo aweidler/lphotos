@@ -171,6 +171,8 @@ class UploadController extends MainController
 
 			if(Storage::disk(self::$DRIVER_MAP[$mimetype])->put($newnameExtended, File::get($file))){
 				if($mimetype == key(self::$DRIVER_MAP)){
+					$info = exif_read_data($file->getPathName(), 0, true);
+
 					$entry = Fileentry::firstOrNew(array('hash'=>$newname));
 					$entry->hash = $newname;
 					$entry->filename = $newnameExtended;
@@ -178,6 +180,7 @@ class UploadController extends MainController
 					$entry->original_filename = $file->getClientOriginalName();
 					$entry->album_id = $inalbum->id;
 					$entry->size = File::size($file);
+					$entry->shot_at = isset($info['EXIF']['DateTimeOriginal']) ? (string)$info['EXIF']['DateTimeOriginal'] : null;
 					$entry->save();
 
 					// Make our different sizes

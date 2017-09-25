@@ -54,7 +54,7 @@ return [
 		'website' => 'About This Website',
 		'wtext' => 'I designed and developed this website to host all of my photos as high quality images. 
 				The website is responsive to different screen sizes and is hosted using cloud services. If 
-				you would like a photo removed from this website for any reason, feel free to contact me. 
+				you would like a photo removed from this website for any reason please contact me. 
 				Like all of the photos, all of the code used to created the website is under the
 				<a target="_blank" href="https://creativecommons.org/licenses/by-sa/3.0/us/">CC BY-SA license</a>.',
 	],
