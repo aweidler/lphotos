@@ -9,6 +9,7 @@
 	margin-left: 15px;
 	text-align: left;
 	display: inline-block;
+	overflow-x: hidden;
 
 	ul{
 		padding: 0;
@@ -17,6 +18,7 @@
 			list-style: none;
 			font-size: 12pt;
 			padding: 5px 0;
+			white-space: nowrap;
 
 			i{
 				font-size: 14pt;
