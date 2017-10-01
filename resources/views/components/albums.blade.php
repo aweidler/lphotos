@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title') {{ 'Albums - '.Config::get('mysite.default_title') }} @endsection
 
 @section('contents')
 

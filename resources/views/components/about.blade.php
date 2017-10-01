@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title') {{ 'About - '.Config::get('mysite.default_title') }} @endsection
 
 @section('contents')
 

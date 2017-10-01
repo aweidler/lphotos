@@ -47,8 +47,9 @@
 		</form>
 	@endif
 
+	<div id="imagecells">
 	@foreach($files as $file)
-		<div class="imagecell" data-name="{{ $file->filename }}" data-file="{{ $file->id }}" data-token="{{ csrf_token() }}">
+		<div class="imagecell ui-state-default" data-name="{{ $file->filename }}" data-file="{{ $file->id }}" data-token="{{ csrf_token() }}">
 			<img src="{{ url('img/small/'.$file->filename) }}" >
 			<div class = 'labels'>
 				@if(file_exists(storage_path('photos/small/'.$file->filename)))
@@ -89,6 +90,7 @@
 			</div>
 		</div>
 	@endforeach
+	</div>
 
 </div>
 <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>

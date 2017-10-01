@@ -13,7 +13,7 @@ class AlbumController extends MainController
 	public function __construct(){
 		parent::__construct();
 
-		$this->_albums = Album::where('foralbumticker', '=', 1)->paginate(1);
+		$this->_albums = Album::where('foralbumticker', '=', 1)->orderBy('updated_at', 'desc')->paginate(1);
 	}
 
 	public function showAlbum(Request $request){
@@ -21,9 +21,6 @@ class AlbumController extends MainController
 		if(!$album){
 			return $this->index($request);
 		}
-
-		// retun view('')
-
 	}
 
 	public function index(Request $request = null){

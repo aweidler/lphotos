@@ -31,6 +31,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<!-- jQuery JS local fallback -->
 	<script>window.jQuery || document.write("<script src='{{ URL::asset(bustAsset('js/jquery.min.js')) }}'><\/script>")</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
 	{{-- Bootstrap JS CDN --}}
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

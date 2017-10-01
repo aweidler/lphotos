@@ -41,7 +41,7 @@ class PhotosController extends MainController
 			$files = $files->inRandomOrder($seed ? $seed : '')->paginate(self::TICKER_AMOUNT);
 		}
 		else if($by == self::BY_ALBUM){
-			$files = $files->orderBy('file_entries.album_id')->paginate(self::TICKER_AMOUNT);
+			$files = $files->orderBy('file_entries.album_id')->orderBy('file_entries.sortindex')->paginate(self::TICKER_AMOUNT);
 		}
 		else{
 			$files = $files->orderBy('file_entries.shot_at', 'DESC')->paginate(self::TICKER_AMOUNT);

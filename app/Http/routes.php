@@ -27,6 +27,7 @@ Route::get('/aupload', 'UploadController@index');
 Route::get('/aupload/{id}', 'UploadController@index');
 Route::get('/aupload/fdelete/{id}', 'UploadController@deleteFile');
 Route::post('/aupload/fsave/{id}', 'UploadController@saveFile');
+Route::post('/aupload/fsaveorder', 'UploadController@saveOrder');
 Route::post('/aupload', 'UploadController@store');
 Route::post('/aupload/{id}', 'UploadController@save');
 

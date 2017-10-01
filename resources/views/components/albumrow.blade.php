@@ -1,10 +1,13 @@
-<?php use Photos\Http\Controllers\UploadController; ?>
+<?php
+use Photos\Http\Controllers\UploadController;
+use Photos\Http\Controllers\PhotosController;	
+?>
 
 @foreach($albums as $album)
 
 	<?php
 		$myfiles = $album->allFiles();
-		$albumurl = action('PhotosController@index', ['album' => $album->id]);
+		$albumurl = action('PhotosController@index', ['album' => $album->id, 'by' => PhotosController::BY_ALBUM ]);
 	?>
 
 	@if($myfiles && count($myfiles))

@@ -96,8 +96,17 @@ class UploadController extends MainController
 		if($myFile){
 			$album = $myFile->album_id;
 			$this->unlinkFile($myFile);
-			$myFile->delete();
 
+			// shift the order down
+			$files = Fileentry::where('album_id', '=', intval($album))->where('sortindex', '>', intval($myFile->sortindex))->get();
+			foreach($files as $file){
+				if($file->sortindex > 1){
+					$file->sortindex = $file->sortindex - 1;
+					$file->save();
+				}
+			}
+
+			$myFile->delete();
 			$request->id = $album;
 		}
 		else{
@@ -124,6 +133,20 @@ class UploadController extends MainController
 		if (Storage::disk(self::DRIVER_XMP)->exists($myFile->hash.'.xmp')){
 			Storage::disk(self::DRIVER_XMP)->delete($myFile->hash.'.xmp');
 		}
+	}
+
+	public function saveOrder(Request $request){
+		if($request->order){
+			foreach($request->order as $id=>$index){
+				$file = Fileentry::find($id);
+				if($file){
+					$file->sortindex = intval($index);
+					$file->save();
+				}
+			}
+			return (string)true;
+		}
+		return (string)false;
 	}
 
 	public function save(Request $request){
@@ -163,7 +186,7 @@ class UploadController extends MainController
 	private function addFile(UploadedFile $file, Album $inalbum){
 		$mimetype = $file->getClientMimeType();
 
-		if(self::$DRIVER_MAP[$mimetype]){
+		if(self::$DRIVER_MAP[$mimetype] && $inalbum){
 			$hashname = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 			$newname = substr($hashname, 0, 32); // remove the .jpg
 			$extension = $file->getClientOriginalExtension();
@@ -173,6 +196,7 @@ class UploadController extends MainController
 				if($mimetype == key(self::$DRIVER_MAP)){
 					$info = exif_read_data($file->getPathName(), 0, true);
 
+					// Create a new File that we have uploaded
 					$entry = Fileentry::firstOrNew(array('hash'=>$newname));
 					$entry->hash = $newname;
 					$entry->filename = $newnameExtended;
@@ -182,6 +206,10 @@ class UploadController extends MainController
 					$entry->size = File::size($file);
 					$entry->shot_at = isset($info['EXIF']['DateTimeOriginal']) ? (string)$info['EXIF']['DateTimeOriginal'] : null;
 					$entry->save();
+
+					// Update our album time, we added photos to this album
+					$inalbum->updated_at = date('Y-m-d H:i:s');
+					$inalbum->save();
 
 					// Make our different sizes
 					$this->saveThumbs($file, $newnameExtended);

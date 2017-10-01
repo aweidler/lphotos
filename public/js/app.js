@@ -831,6 +831,31 @@ $(function(){
 		$(this).autoTag();
 	});
 
+	function saveSort(){
+		var $cells = $('#imagecells > div.imagecell');
+		if($cells.length){
+			var token = $($cells[0]).data('token');
+
+			var items = {};
+			$cells.each(function(i){
+				items[parseInt($(this).data('file'))] = i + 1;
+			});
+
+			$.post($('body').data('path') + '/aupload/fsaveorder', {
+				order: items,
+				_token: token,
+			}, function(result){
+				console.log(result);
+			});
+		}
+	}
+
+	$uploadWrapper.find('#imagecells:first').sortable({
+		stop: function(e, ui){
+			saveSort();
+		}
+	});
+
 	$.fn.autoTag = function(){
 		var $self = $(this);
 		var $imagecell = $self.parents('.imagecell:first');

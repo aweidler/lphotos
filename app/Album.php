@@ -9,7 +9,7 @@ class Album extends Model
 	protected $table = 'albums';
 	
 	public function allFiles(){
-		return Fileentry::where('album_id', '=', $this->id)->get();
+		return Fileentry::where('album_id', '=', $this->id)->orderBy('sortindex')->get();
 	}
 
 	public function groupedFiles(){
