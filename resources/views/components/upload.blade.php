@@ -8,7 +8,7 @@
 	
 	@foreach($albums as $album)
 		<form action="{{ url('aupload/'.$album->id) }}" class="fsadd form-inline" method="post">
-			{{ csrf_field() }}
+			{!! csrf_field() !!}
 			<div class="form-group curalbum">
 				<input name="name" type="text" maxlength="100" autocomplete="off" value="{{ $album->name }}">
 				<input name="location" type="text" placeholder="Location (City, Province)" maxlength="500" autocomplete="off" value="{{ $album->location }}">
@@ -20,7 +20,7 @@
 	@endforeach
 
 	<form action="{{ url('aupload') }}" class="fsadd form-inline" method="post">
-		{{ csrf_field() }}
+		{!! csrf_field() !!}
 		<div class="form-group newalbum">
 			<input type="text" placeholder="Name" name="newalbum" maxlength="100" autocomplete="off">
 			<input type="text" placeholder="Location (City, Province)" name="newlocation" maxlength="500" autocomplete="off">
@@ -37,7 +37,7 @@
 
 	@if($selected)
 		<form action="{{ url('aupload/'.$selected->id) }}" class="fsadd form-inline" autocomplete="off" enctype="multipart/form-data" method="post">
-			{{ csrf_field() }}
+			{!! csrf_field() !!}
 
 			<div class="form-group newfiles">
 				<label for="newfiles">{{ trans('pagination.addphotos') . ' ' .$selected->name . ' ('.count($files).')' }}</label>
@@ -49,7 +49,7 @@
 
 	<div id="imagecells">
 	@foreach($files as $file)
-		<div class="imagecell ui-state-default" data-name="{{ $file->filename }}" data-file="{{ $file->id }}" data-token="{{ csrf_token() }}">
+		<div class="imagecell ui-state-default" data-name="{{ $file->filename }}" data-file="{{ $file->id }}" data-token="{!! csrf_token() !!}">
 			<img src="{{ url('img/small/'.$file->filename) }}" >
 			<div class = 'labels'>
 				@if(file_exists(storage_path('photos/small/'.$file->filename)))
