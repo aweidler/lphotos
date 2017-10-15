@@ -609,6 +609,17 @@ $(function(){
 				else{
 					$shortest.append($img);
 				}
+
+				var $realimg = $img.find('img:first');
+				if($realimg[0]){
+					$realimg[0].onload = function(){
+						var $loader = $(this).next();
+						if($loader.length){
+							$loader.remove();
+						}
+					};
+				}
+
 			}
 
 			return true;

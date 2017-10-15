@@ -1,5 +1,11 @@
 
 
+@keyframes fadding {
+  0% { color: #333 }
+  50% { color: #ccc }
+  100% { color: #333 }
+}
+
 .fs-album-wrapper{
 	padding: 0;
 	background: inherit;
@@ -52,11 +58,12 @@ $scrollscale: 10px;
 
 			i.loader{
 				position: absolute;
-				left: calc(50% - 35px);
-				top: calc(50% - 26px);
-				color: #222;
-				font-size: 40pt;
-				text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+				right: 20px;
+				bottom: 16px;
+				color: #ccc;
+				animation: fadding 3s linear infinite;
+				font-size: 35pt;
+				// text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 			}
 		}
 

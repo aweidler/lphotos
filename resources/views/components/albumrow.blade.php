@@ -17,7 +17,7 @@ use Photos\Http\Controllers\PhotosController;
 			@foreach($myfiles as $file)
 				<div class="fileitem" style="width: {{ $file->widthForHeight(485) }}px;">
 					<img src="" data-src="{{ $file->getImage() }}" data-src-retina="{{ $file->getImage(UploadController::DRIVER_LG) }}" >
-					<i class="loader fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+					<i class="loader fa fa-picture-o" title="Loading&hellip;"></i>
 				</div>
 			@endforeach
 		</div>
