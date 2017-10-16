@@ -187,8 +187,8 @@ class UploadController extends MainController
 		$mimetype = $file->getClientMimeType();
 
 		if(self::$DRIVER_MAP[$mimetype] && $inalbum){
-			$hashname = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-			$newname = substr($hashname, 0, 32); // remove the .jpg
+			$hashname = $newname = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+			//$newname = substr($hashname, 0, 32); // I want to replace the old files given the file name
 			$extension = $file->getClientOriginalExtension();
 			$newnameExtended = $newname.'.'.$extension;
 
@@ -205,6 +205,8 @@ class UploadController extends MainController
 					$entry->album_id = $inalbum->id;
 					$entry->size = File::size($file);
 					$entry->shot_at = isset($info['EXIF']['DateTimeOriginal']) ? (string)$info['EXIF']['DateTimeOriginal'] : null;
+					$entry->sortindex = (isset($entry->sortindex) ? intval($entry->sortindex) : $inalbum->maxSortindex() + 1);
+					
 					$entry->save();
 
 					// Update our album time, we added photos to this album

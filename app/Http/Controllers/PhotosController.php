@@ -22,7 +22,7 @@ class PhotosController extends MainController
 		parent::__construct();
 	}
 
-	public function getPhotos($by = self::BY_DATE, $album = null, $query = null, $seed = ''){
+	public function getPhotos($by = self::BY_RANDOM, $album = null, $query = null, $seed = ''){
 		$files = Fileentry::with('album');
 
 		if($album){
@@ -108,7 +108,7 @@ class PhotosController extends MainController
 											  'sorts' => $sorts,
 											  'seed' => $seed,
 											  'listLabel' => $listlabel,
-											  'selectedSort' => isset($sorts[$request->by]) ? $request->by : self::BY_DATE ]);
+											  'selectedSort' => isset($sorts[$request->by]) ? $request->by : self::BY_RANDOM ]);
 		}
 	}
 }

@@ -12,6 +12,10 @@ class Album extends Model
 		return Fileentry::where('album_id', '=', $this->id)->orderBy('sortindex')->get();
 	}
 
+	public function maxSortindex(){
+		return intval(Fileentry::where('album_id', '=', $this->id)->max('sortindex'));
+	}
+
 	public function groupedFiles(){
 		$files = $this->allFiles();
 	}

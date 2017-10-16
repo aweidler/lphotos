@@ -55,47 +55,57 @@ return [
         ],
 
         'raw' => [
-            'driver' => 'local',
+            'driver' => env('AZURE_DRIVER'),
             'root' => storage_path('photos/raw'),
+            'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
+            'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
+            'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
             'visibility' => 'public',
         ],
 
         'rawedits' => [
-            'driver' => 'local',
+            'driver' => env('AZURE_DRIVER'),
             'root' => storage_path('photos/rawedits'),
+            'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
+            'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
+            'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
             'visibility' => 'public',
         ],
 
         'small' => [
-            'driver' => 'local',
+            'driver' => env('AZURE_DRIVER'),
             'root' => storage_path('photos/small'),
+            'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
+            'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
+            'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
             'visibility' => 'public',
         ],
 
         'medium' => [
-            'driver' => 'local',
+            'driver' => env('AZURE_DRIVER'),
             'root' => storage_path('photos/medium'),
+            'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
+            'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
+            'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
             'visibility' => 'public',
         ],
 
         'large' => [
-            'driver' => 'local',
+            'driver' => env('AZURE_DRIVER'),
             'root' => storage_path('photos/large'),
+            'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
+            'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
+            'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
             'visibility' => 'public',
         ],
 
         'full' => [
-            'driver' => 'local',
+            'driver' => env('AZURE_DRIVER'),
             'root' => storage_path('photos/full'),
+            'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
+            'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
+            'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
             'visibility' => 'public',
-        ],
-
-        's3' => [
-            'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
         ],
 
     ],

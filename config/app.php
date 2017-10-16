@@ -159,6 +159,7 @@ return [
         Photos\Providers\EventServiceProvider::class,
         Photos\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Ijin82\Flysystem\Azure\AzureBlobServiceProvider::class,
 
     ],
 
