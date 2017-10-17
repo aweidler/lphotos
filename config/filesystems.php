@@ -60,7 +60,7 @@ return [
             'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
             'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
             'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
-            'ContentType' => 'image/jpeg',
+            'mimetype' => 'image/x-dcraw',
             'visibility' => 'public',
         ],
 
@@ -70,7 +70,7 @@ return [
             'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
             'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
             'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
-            'ContentType' => 'image/jpeg',
+            'mimetype' => 'image/jpeg',
             'visibility' => 'public',
         ],
 
@@ -80,7 +80,7 @@ return [
             'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
             'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
             'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
-            'ContentType' => 'image/jpeg',
+            'mimetype' => 'image/jpeg',
             'visibility' => 'public',
         ],
 
@@ -90,7 +90,7 @@ return [
             'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
             'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
             'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
-            'ContentType' => 'image/jpeg',
+            'mimetype' => 'image/jpeg',
             'visibility' => 'public',
         ],
 
@@ -100,7 +100,7 @@ return [
             'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
             'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
             'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
-            'ContentType' => 'image/jpeg',
+            'mimetype' => 'image/jpeg',
             'visibility' => 'public',
         ],
 
@@ -110,7 +110,7 @@ return [
             'endpoint' => env('AZURE_BLOB_STORAGE_ENDPOINT'),
             'container' => env('AZURE_BLOB_STORAGE_CONTAINER1'),
             'blob_service_url' => env('AZURE_BLOB_SERVICE_URL'),
-            'ContentType' => 'image/jpeg',
+            'mimetype' => 'image/jpeg',
             'visibility' => 'public',
         ],
 

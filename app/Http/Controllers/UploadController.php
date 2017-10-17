@@ -243,7 +243,7 @@ class UploadController extends MainController
 			});
 
 			$data = $img->encode(pathinfo($savename, PATHINFO_EXTENSION), self::DRIVER_QUALITY);
-			if(!Storage::disk($driver)->put($savename, $data)){
+			if(!Storage::disk($driver)->put($savename, (string)$data)){
 				throw new NotWritableException(
 					"Can't write image data to path ({$driver}/{$path})"
 				);
