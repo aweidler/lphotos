@@ -16,7 +16,7 @@ use Photos\Http\Controllers\PhotosController;
 		<div class="pag-scroller">
 			@foreach($myfiles as $file)
 				<div class="fileitem" style="width: {{ $file->widthForHeight(485) }}px;">
-					<img src="" data-src="{{ $file->getImage() }}" data-src-retina="{{ $file->getImage(UploadController::DRIVER_LG) }}" >
+					<img src="" data-src="{{ $file->getImage(UploadController::DRIVER_MD) }}" data-src-retina="{{ $file->getImage(UploadController::DRIVER_LG) }}" >
 					<i class="loader fa fa-picture-o" title="Loading&hellip;"></i>
 				</div>
 			@endforeach

@@ -3,7 +3,8 @@
 namespace Photos\Providers;
 
 use Storage;
-use Ijin82\Flysystem\Azure\AzureAdapter;
+//use Ijin82\Flysystem\Azure\AzureAdapter;
+use Photos\Adapters\AzurePhotosAdapter;
 use League\Flysystem\Filesystem;
 use MicrosoftAzure\Storage\Common\ServicesBuilder;
 use Illuminate\Support\ServiceProvider;
@@ -21,7 +22,7 @@ class AzureServiceProvider extends ServiceProvider
             $blobService = ServicesBuilder::getInstance()
                 ->createBlobService($config['endpoint']);
 
-            return new Filesystem(new AzureAdapter(
+            return new Filesystem(new AzurePhotosAdapter(
                 $blobService,
                 $config,
                 (isset($config['root']) ? basename($config['root']) : null)

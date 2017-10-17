@@ -17,15 +17,16 @@ class Fileentry extends Model
 	}
 
 	public function getImage($from = UploadController::DRIVER_MD){
-		if(file_exists($this->getImageOnDisk($from))){
-			return url('img/'.$from.'/'.$this->filename);
-		}
-		else if(file_exists($this->getImageOnDisk(UploadController::DRIVER_SM))){
-			return url('img/'.UploadController::DRIVER_SM.'/'.$this->filename);
-		}
-		else{
-			return url('img/'.UploadController::DRIVER_FL.'/'.$this->filename);
-		}
+		return photoUrl($this->filename, $from);
+		// if(file_exists($this->getImageOnDisk($from))){
+		// 	return url('img/'.$from.'/'.$this->filename);
+		// }
+		// else if(file_exists($this->getImageOnDisk(UploadController::DRIVER_SM))){
+		// 	return url('img/'.UploadController::DRIVER_SM.'/'.$this->filename);
+		// }
+		// else{
+		// 	return url('img/'.UploadController::DRIVER_FL.'/'.$this->filename);
+		// }
 	}
 
 	public function imageSize($from = UploadController::DRIVER_MD){
@@ -62,7 +63,7 @@ class Fileentry extends Model
 	}
 
 	private function getImageOnDisk($from = UploadController::DRIVER_MD){
-		return storage_path('photos/'.$from.'/'.$this->filename);
+		return $this->getImage($from); //storage_path('photos/'.$from.'/'.$this->filename);
 	}
 
 }

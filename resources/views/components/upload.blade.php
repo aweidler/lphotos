@@ -1,3 +1,5 @@
+<?php use Photos\Http\Controllers\UploadController; ?>
+
 @extends('layouts.main')
 
 @section('contents')
@@ -50,25 +52,19 @@
 	<div id="imagecells">
 	@foreach($files as $file)
 		<div class="imagecell ui-state-default" data-name="{{ $file->filename }}" data-file="{{ $file->id }}" data-token="{!! csrf_token() !!}">
-			<img src="{{ url('img/small/'.$file->filename) }}" >
+			<img src="{{ photoUrl($file->filename, UploadController::DRIVER_SM) }}" >
 			<div class = 'labels'>
-				@if(file_exists(storage_path('photos/small/'.$file->filename)))
+				@if(@file_get_contents(photoUrl($file->filename, UploadController::DRIVER_SM)))
 					<label>sml</label>
 				@endif
-				@if(file_exists(storage_path('photos/medium/'.$file->filename)))
+				@if(@file_get_contents(photoUrl($file->filename, UploadController::DRIVER_MD)))
 					<label>med</label>
 				@endif
-				@if(file_exists(storage_path('photos/large/'.$file->filename)))
+				@if(@file_get_contents(photoUrl($file->filename, UploadController::DRIVER_LG)))
 					<label>lrg</label>
 				@endif
-				@if(file_exists(storage_path('photos/full/'.$file->filename)))
+				@if(@file_get_contents(photoUrl($file->filename, UploadController::DRIVER_FL)))
 					<label>ful</label>
-				@endif
-				@if(file_exists(storage_path('photos/rawedits/'.$file->hash.'.CR2')))
-					<label>CR2</label>
-				@endif
-				@if(file_exists(storage_path('photos/rawedits/'.$file->hash.'.xmp')))
-					<label>xmp</label>
 				@endif
 			</div>
 
