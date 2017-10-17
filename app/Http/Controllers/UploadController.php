@@ -8,6 +8,7 @@ use Photos\Fileentry;
 use Photos\Http\Requests;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Exception\NotFoundException;
 use Illuminate\Http\UploadedFile;
 
 class UploadController extends MainController
@@ -241,8 +242,16 @@ class UploadController extends MainController
 				$constraint->upsize();
 			});
 
-			$path = Storage::disk($driver)->getDriver()->getAdapter()->getPathPrefix();
-			$img->save($path.$savename, self::DRIVER_QUALITY);
+			$data = $img->encode(pathinfo($savename, PATHINFO_EXTENSION), self::DRIVER_QUALITY);
+			if(!Storage::disk($driver)->put($savename, $data)){
+				throw new NotWritableException(
+					"Can't write image data to path ({$driver}/{$path})"
+				);
+				return false;
+			}
+
+			//$path = Storage::disk($driver)->getDriver()->getAdapter()->getPathPrefix();
+			//$img->save($path.$savename, self::DRIVER_QUALITY);
 		}
 		return true;
 	}
