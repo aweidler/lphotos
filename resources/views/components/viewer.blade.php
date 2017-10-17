@@ -30,19 +30,19 @@
 
 				<div class="pswp__counter"></div>
 
-				<button class="pswp__button pswp__button--close" title="Close (Esc)">
+				<button class="pswp__button pswp__button--close" title="{{ trans('aria.photos.close') }} (Esc)">
 					<i class="fa fa-times" aria-hidden="true"></i>
 				</button>
 
-				<button class="pswp__button pswp__button--download" title="Download">
+				<button class="pswp__button pswp__button--download" title="{{ trans('aria.photos.download') }}">
 					<i class="fa fa-download" aria-hidden="true"></i>
 				</button>
 
-				<button class="pswp__button pswp__button--info" title="Info">
+				<button class="pswp__button pswp__button--info" title="{{ trans('aria.photos.info') }}">
 					<i class="fa fa-info-circle" aria-hidden="true"></i>
 				</button>
 
-				<button class="pswp__button pswp__button--album" title="Go to Album">
+				<button class="pswp__button pswp__button--album" title="{{ trans('aria.photos.gotoalbum') }}">
 					<i class="fa fa-folder-open-o" aria-hidden="true"></i><span class="noselect viewer-album">Album</span>
 				</button>
 
@@ -61,11 +61,11 @@
 				<div class="pswp__share-tooltip"></div> 
 			</div>
 
-			<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+			<button class="pswp__button pswp__button--arrow--left" title="{{ trans('pagination.previous') }}">
 				<i class="fa fa-chevron-left" aria-hidden="true"></i>
 			</button>
 
-			<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+			<button class="pswp__button pswp__button--arrow--right" title="{{ trans('pagination.next') }}">
 				<i class="fa fa-chevron-right" aria-hidden="true"></i>
 			</button>
 

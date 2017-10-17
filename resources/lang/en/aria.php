@@ -34,6 +34,11 @@ return [
 	'photos' => [
 		'in' => 'in',
 		'noresults' => 'No Photo Results',
+		'gotoalbum' => 'Go to Album',
+		'info' => 'Info',
+		'download' => 'Download',
+		'zoomin' => 'Zoom In',
+		'close' => 'Close',
 	],
 	'upload' => [
 		'addalbum' => 'Add an Album',

@@ -27,7 +27,7 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 	<img class="thumb" src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
 	<i class="loader fa fa-picture-o" title="Loading&hellip;"></i>
 	<div class="infowrapper">
-		<h3>{{ $finfo['FileName'] }}</h3>
+		<h3>{{ $photo->original_filename }}</h3>
 		<div>
 			<table>
 				<tr><td>Date</td><td>{{ $date }}</td></tr>
@@ -44,17 +44,19 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 		</div>
 	</div>
 	<div class ="imgoverlay noselect">
-		<a class = "albumname" title="Go to Album" data-album="{{ $photo->album_id }}" href="#">
+		<a class = "albumname" title="{{ trans('aria.photos.gotoalbum') }}" data-album="{{ $photo->album_id }}" href="#">
 			<span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span>&nbsp;{{ $photo->album->name }}
 		</a>
-		<a class="toggle-info" title="Info">
-			<i class="fa fa-info-circle" aria-hidden="true"></i>
-		</a>
-		<a class="toggle-download" title="Download" href="{{ action('PhotosController@download', $photo->id) }}" download>
-			<i class="fa fa-download" aria-hidden="true"></i>
-		</a>
-		<a class="toggle-zoom" title="Zoom In">
-			<i class="fa fa-search-plus" aria-hidden="true"></i>
-		</a>
+		<div class="tool-buttons">
+			<a class="toggle-info" title="{{ trans('aria.photos.info') }}">
+				<i class="fa fa-info-circle" aria-hidden="true"></i>
+			</a>
+			<a class="toggle-download" title="{{ trans('aria.photos.download') }}" href="{{ action('PhotosController@download', $photo->id) }}" download>
+				<i class="fa fa-download" aria-hidden="true"></i>
+			</a>
+			<a class="toggle-zoom" title="{{ trans('aria.photos.zoomin') }}">
+				<i class="fa fa-search-plus" aria-hidden="true"></i>
+			</a>
+		</div>
 	</div>
 </div>
