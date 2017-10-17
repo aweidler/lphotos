@@ -72,7 +72,7 @@ class PhotosController extends MainController
 			return response()->download($path, null, ['Content-Type' => $mime]);
 		}
 
-		abort(403, 'The file cannot be found or has been removed.');
+		abort(403, 'Cannot download, the file cannot be found or has been removed.');
 	}
 
 	public function index(Request $request = null){

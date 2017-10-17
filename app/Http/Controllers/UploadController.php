@@ -22,6 +22,9 @@ class UploadController extends MainController
 	const DRIVER_FL = 'full';
 	const DRIVER_XMP = 'rawedits';
 
+	// Do not change these without resizing all previous images
+	// They are used for calculations
+	// This is so we don't have to frequently hit Azure's endpoint
 	public static $IMAGE_SIZES = [
 		self::DRIVER_SM => 480,
 		self::DRIVER_MD => 740,
@@ -207,7 +210,14 @@ class UploadController extends MainController
 					$entry->size = File::size($file);
 					$entry->shot_at = isset($info['EXIF']['DateTimeOriginal']) ? (string)$info['EXIF']['DateTimeOriginal'] : null;
 					$entry->sortindex = (isset($entry->sortindex) ? intval($entry->sortindex) : $inalbum->maxSortindex() + 1);
+					$entry->exif = json_encode($info);
 					
+					$img = \Image::make($file);
+					if($img->height() && $img->width()){
+						$entry->height = intval($img->height());
+						$entry->width = intval($img->width());
+					}
+
 					$entry->save();
 
 					// Update our album time, we added photos to this album
