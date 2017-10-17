@@ -154,12 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Photos\Providers\AppServiceProvider::class,
+        Photos\Providers\AzureServiceProvider::class,
         Photos\Providers\AuthServiceProvider::class,
         Photos\Providers\EventServiceProvider::class,
         Photos\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Ijin82\Flysystem\Azure\AzureBlobServiceProvider::class,
 
     ],
 
