@@ -54,8 +54,6 @@ class PhotosController extends MainController
 			return $this->index($request);
 		}
 
-		ini_set('memory_limit','35MB');
-
 		$entry = Fileentry::find($id);
 		if(!$entry){
 			$entry = Fileentry::where('hash', '=', $id)->first();
@@ -64,12 +62,11 @@ class PhotosController extends MainController
 			}
 		}
 
-		$storage = Storage::disk(UploadController::DRIVER_FL);
-
-		if($entry && $storage->exists($entry->filename)){
-			//$path = $storage->getDriver()->getAdapter()->getPathPrefix().$entry->filename;
-			$path = photoUrl($entry->filename, UploadController::DRIVER_FL);
-			return response()->download($path, null, ['Content-Type' => $entry->mime]);
+		if($entry){
+			$data = Storage::disk(UploadController::DRIVER_FL)->read($entry->filename);
+			return response($data, '200')
+					->withHeaders(['Content-Type' => $entry->mime, 
+						'Content-Disposition'=>'attachment; filename="'.$entry->filename.'"']);
 		}
 
 		abort(403, 'Cannot download, the file cannot be found or has been removed.');
