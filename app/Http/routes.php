@@ -32,13 +32,13 @@ Route::post('/aupload', 'UploadController@store');
 Route::post('/aupload/{id}', 'UploadController@save');
 
 // images
-Route::get('/img/{driver}/{name}', function($driver, $name){
-	ini_set('memory_limit','256M');
-	//$path = Storage::disk($driver)->getDriver()->getAdapter()->getPathPrefix().$name;
-	$data = Storage::disk($driver)->get($name);
+// Route::get('/img/{driver}/{name}', function($driver, $name){
+// 	ini_set('memory_limit','256M');
+// 	//$path = Storage::disk($driver)->getDriver()->getAdapter()->getPathPrefix().$name;
+// 	$data = Storage::disk($driver)->get($name);
 
-	$response = Image::make($data)->response();
-	$response->setLastModified(new DateTime("now"));
-	$response->setExpires(new DateTime("tomorrow"));
-	return $response;
-});
+// 	$response = Image::make($data)->response();
+// 	$response->setLastModified(new DateTime("now"));
+// 	$response->setExpires(new DateTime("tomorrow"));
+// 	return $response;
+// });

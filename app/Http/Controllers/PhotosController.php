@@ -67,9 +67,9 @@ class PhotosController extends MainController
 		$storage = Storage::disk(UploadController::DRIVER_FL);
 
 		if($entry && $storage->exists($entry->filename)){
-			$path = $storage->getDriver()->getAdapter()->getPathPrefix().$entry->filename;
-			$mime = mime_content_type($path);
-			return response()->download($path, null, ['Content-Type' => $mime]);
+			//$path = $storage->getDriver()->getAdapter()->getPathPrefix().$entry->filename;
+			$path = photoUrl($entry->filename, UploadController::DRIVER_FL);
+			return response()->download($path, null, ['Content-Type' => $entry->mime]);
 		}
 
 		abort(403, 'Cannot download, the file cannot be found or has been removed.');
