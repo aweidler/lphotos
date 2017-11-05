@@ -6,7 +6,7 @@ $cinfo = $info['COMPUTED'];
 $iinfo = isset($info['IFD0']) ? $info['IFD0'] : null;
 $einfo = isset($info['EXIF']) ? $info['EXIF'] : null;
 $nodata = '--';
-$fnum = isset($einfo['ApertureValue']) ? explode('/', $einfo['ApertureValue']) : null;
+$fnum = isset($einfo['ApertureValue']) ? explode('/', $einfo['ApertureValue']) : null; 
 if($fnum && count($fnum) > 1){
 	$fnum = number_format($fnum[0] / $fnum[1], 1);
 }
