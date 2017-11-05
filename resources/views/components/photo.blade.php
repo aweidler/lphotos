@@ -6,8 +6,8 @@ $cinfo = $info['COMPUTED'];
 $iinfo = isset($info['IFD0']) ? $info['IFD0'] : null;
 $einfo = isset($info['EXIF']) ? $info['EXIF'] : null;
 $nodata = '--';
-$fnum = explode('/', $einfo['ApertureValue']);
-if(count($fnum) > 1){
+$fnum = isset($einfo['ApertureValue']) ? explode('/', $einfo['ApertureValue']) : null;
+if($fnum && count($fnum) > 1){
 	$fnum = number_format($fnum[0] / $fnum[1], 1);
 }
 else{
@@ -32,7 +32,7 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 			<table>
 				<tr><td>Date</td><td>{{ $date }}</td></tr>
 				<tr><td>Size</td><td>{{ $cinfo['Width'] }} x {{ $cinfo['Height'] }} ({{ round($finfo['FileSize'] / 1024 / 1024, 1) }} MB)</td></tr>
-				<tr><td>Resolution</td><td>{{ intval($iinfo['XResolution']) > 1 ? intval($iinfo['XResolution']) : 72 }} ppi</td></tr>
+				<tr><td>Resolution</td><td>{{ intval($iinfo['XResolution']) > 1 ? min(300, intval($iinfo['XResolution'])) : 72 }} ppi</td></tr>
 				<tr><td>Shot With</td><td>{{ $iinfo['Model'] or $nodata }}</td></tr>
 				<tr><td>Shot By</td><td>{{ $iinfo['Artist'] or $nodata }}</td></tr>
 				<tr><td>Focal Length</td><td>{{ floatval($einfo['FocalLength']) > 1 ? floatval($einfo['FocalLength']).' mm' : $nodata }}</td></tr>
