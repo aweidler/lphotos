@@ -7,6 +7,11 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
 
+if(isset($_GET['phpinfo'])){
+	echo phpinfo();
+	die();
+}
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
