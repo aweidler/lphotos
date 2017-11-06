@@ -11,7 +11,7 @@ if($fnum && count($fnum) > 1){
 	$fnum = number_format($fnum[0] / $fnum[1], 1);
 }
 else{
-	$fnum = null;
+	$fnum = null; 
 }
 
 $date = date('m/d/Y  h:i a', strtotime($einfo['DateTimeOriginal']));// preg_replace('/:/', '-', $einfo['DateTimeOriginal'], 2);
