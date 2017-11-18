@@ -44,7 +44,7 @@ class UploadController extends MainController
 	 */
 	public function index(Request $request = null)
 	{
-		ini_set('memory_limit','16M');
+		ini_set('memory_limit','500M');
 		$albums = Album::all();
 		$selected = null;
 		if($request){
