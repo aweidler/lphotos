@@ -73,6 +73,7 @@ class PhotosController extends MainController
 	}
 
 	public function index(Request $request = null){
+		ini_set('memory_limit','16M');
 		$seed = isset($request->seed) ? $request->seed : time();
 		if($request->album){
 			$album = Album::find(intval($request->album));
