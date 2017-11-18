@@ -14,7 +14,12 @@ else{
 	$fnum = null; 
 }
 
-$date = date('m/d/Y  h:i a', strtotime($einfo['DateTimeOriginal']));// preg_replace('/:/', '-', $einfo['DateTimeOriginal'], 2);
+if(isset($einfo['DateTimeOriginal'])){
+	$date = date('m/d/Y  h:i a', strtotime($einfo['DateTimeOriginal']));// preg_replace('/:/', '-', $einfo['DateTimeOriginal'], 2);
+}
+else{
+	$date = $nodata;
+}
 
 $size = $photo->imageSize(UploadController::DRIVER_MD);
 $lsize = $photo->imageSize(UploadController::DRIVER_LG);
