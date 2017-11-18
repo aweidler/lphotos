@@ -40,7 +40,7 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 				<tr><td>Resolution</td><td>{{ intval($iinfo['XResolution']) > 1 ? min(300, intval($iinfo['XResolution'])) : 72 }} ppi</td></tr>
 				<tr><td>Shot With</td><td>{{ $iinfo['Model'] or $nodata }}</td></tr>
 				<tr><td>Shot By</td><td>{{ $iinfo['Artist'] or $nodata }}</td></tr>
-				<tr><td>Focal Length</td><td>{{ floatval($einfo['FocalLength']) > 1 ? floatval($einfo['FocalLength']).' mm' : $nodata }}</td></tr>
+				<tr><td>Focal Length</td><td>{{ isset($einfo['FocalLength']) && floatval($einfo['FocalLength']) > 1 ? floatval($einfo['FocalLength']).' mm' : $nodata }}</td></tr>
 				<tr><td>Shutter</td><td>{{ $einfo['ExposureTime'] or $nodata }}</td></tr>
 				<tr><td>Aperture</td><td>{{ $fnum or $nodata }}</td></tr>
 				<tr><td>ISO</td><td>{{ $einfo['ISOSpeedRatings'] or $nodata }}</td></tr>
