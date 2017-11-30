@@ -29,7 +29,7 @@ $path = $photo->getImage(UploadController::DRIVER_LG);
 <div class="imgwrapper" data-lwidth="{{ $lsize[0] }}" data-lheight="{{ $lsize[1] }}"
  data-width="{{ $size[0] }}" data-height="{{ $size[1] }}"
  data-path="{{ $path }}">
-	<img class="thumb" src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
+	<img style="min-height: 350px;" class="thumb" src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
 	<i class="loader fa fa-picture-o" title="Loading&hellip;"></i>
 	<div class="infowrapper">
 		<h3>{{ $photo->original_filename }}</h3>

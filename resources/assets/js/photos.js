@@ -92,6 +92,7 @@ $(function(){
 				if($realimg[0]){
 					$realimg[0].onload = function(){
 						var $loader = $(this).next();
+						$realimg.css({'min-height':'62px'});
 						if($loader.length){
 							$loader.remove();
 						}
