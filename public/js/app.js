@@ -614,8 +614,8 @@ $(function(){
 				if($realimg[0]){
 					$realimg[0].onload = function(){
 						var $loader = $(this).next();
-						$img.css({'margin-bottom':'0px'});
-						console.log($img);
+						$(this).parent().css({'margin-bottom':'0px'});
+						console.log($(this).parent());
 						if($loader.length){
 							$loader.remove();
 						}
