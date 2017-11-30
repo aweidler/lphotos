@@ -7,6 +7,8 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
 
+ini_set('memory_limit', '500M');
+
 if(isset($_GET['phpinfo'])){
 	echo phpinfo();
 	die();
