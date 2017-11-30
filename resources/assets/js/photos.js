@@ -93,7 +93,6 @@ $(function(){
 					$realimg[0].onload = function(){
 						var $loader = $(this).next();
 						$(this).parent().css({'margin-bottom':'0px'});
-						console.log($(this).parent());
 						if($loader.length){
 							$loader.remove();
 						}

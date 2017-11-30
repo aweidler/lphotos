@@ -26,7 +26,7 @@ $lsize = $photo->imageSize(UploadController::DRIVER_LG);
 $path = $photo->getImage(UploadController::DRIVER_LG);
 ?>
 
-<div class="imgwrapper" style="margin-bottom: 300px;" data-lwidth="{{ $lsize[0] }}" data-lheight="{{ $lsize[1] }}"
+<div class="imgwrapper" style="margin-bottom: 150px;" data-lwidth="{{ $lsize[0] }}" data-lheight="{{ $lsize[1] }}"
  data-width="{{ $size[0] }}" data-height="{{ $size[1] }}"
  data-path="{{ $path }}">
 	<img class="thumb" src="{{ $photo->getImage(UploadController::DRIVER_MD) }}">
