@@ -51,7 +51,7 @@ class PhotosController extends MainController
 
 	public function random(Request $request){
 		$number = intval($request->input('n', 250));
-		return Fileentry::select('id', 'filename', 'album_id')->inRandomOrder()->take($number)->get();
+		return Fileentry::select('filename', 'album_id')->inRandomOrder()->take($number)->get();
 	}
 
 	public function download(Request $request, $id){

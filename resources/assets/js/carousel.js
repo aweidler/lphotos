@@ -1,5 +1,5 @@
 $(function(){
-	var amount = 200; // number of images to pull at one time
+	var amount = 150; // number of images to pull at one time
 	var scale = 0.75; // matches what is in css
 	var animtime = 2; // time for our animation to complete
 	var rotatestd = 30; // max degress for rotation
