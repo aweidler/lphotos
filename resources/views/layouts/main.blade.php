@@ -15,7 +15,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap_cdn">
 	<link href="{{ URL::asset(bustAsset('css/app.css')) }}" rel="stylesheet">
 </head>
-<body id="app-layout" data-path="{{ env('APP_URL') }}">
+<body id="app-layout" data-path="{{ env('APP_URL') }}" data-thumburl="{{ Storage::drive(Photos\Http\Controllers\UploadController::DRIVER_SM)->getAdapter()->getUrl() }}">
 	@include('layouts.header')
 
 

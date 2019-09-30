@@ -21,7 +21,7 @@
 
 	h1, h4, h2{
 		font-family: $fontA;
-		color: $icon-Weidler-color/2;
+		color: darken($icon-Weidler-color, 30%);
 	}
 	h1{
 		// white-space: nowrap;

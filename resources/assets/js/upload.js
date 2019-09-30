@@ -5,8 +5,8 @@ $(function(){
 		return false;
 	}
 
-	const threshold = 0.93;
-	const app = new Clarifai.App({
+	var threshold = 0.93;
+	var app = new Clarifai.App({
 		apiKey: 'ea746f008b50445aa47ffb018f3d5681',
 	});
 

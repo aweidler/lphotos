@@ -6,11 +6,6 @@
 	<div class="content">
 		<div class="fspolar">
 			{{-- Insert images to process here --}}
-			<img src="{{URL::asset('/image/1.jpg')}}">
-			<img src="{{URL::asset('/image/2.jpg')}}">
-			<img src="{{URL::asset('/image/3.jpg')}}">
-			<img src="{{URL::asset('/image/4.jpg')}}">
-			<img src="{{URL::asset('/image/5.jpg')}}">
 		</div>
 	</div>
 </div>

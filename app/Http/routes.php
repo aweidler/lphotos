@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/photos', 'PhotosController@index'); 
 Route::get('/photos/{id}', 'PhotosController@download');
+Route::get('/random', 'PhotosController@random');
 
 Route::get('/albums', 'AlbumController@index');
 Route::get('/albums/{id}', 'AlbumController@viewAlbum');

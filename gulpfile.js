@@ -17,8 +17,8 @@ var gulp = require('gulp'),
 	del = require('del'),
 	bust = require('gulp-buster'),
 	watch = require('gulp-watch'),
-	merge = require('merge-stream'),
-	runSequence = require('run-sequence');
+	merge = require('merge-stream');
+	// runSequence = require('run-sequence');
 
 // config vars
 var busterFile = 'busters.json';
@@ -55,12 +55,12 @@ var paths = {
 
 // default run all tasks
 gulp.task('default', function(cb){
-	runSequence('clean',
+	gulp.series('clean',
 				'copy',
 				'_styles', 
 				'_scripts',
-				'buster',
-				cb);
+				'buster')();
+	cb();
 });
 
 
@@ -71,7 +71,6 @@ gulp.task('default', function(cb){
  *
  */
 
-gulp.task('copy', ['_copymyfont', '_copybootstrapfont', '_copyfontawesomefont', '_copyvenderjs']);
 
 gulp.task('_copymyfont', function(){
 	return gulp.src(paths.in.fonts.myfonts)
@@ -93,7 +92,7 @@ gulp.task('_copyvenderjs', function(){
 			.pipe(gulp.dest(paths.out.js));
 });
 
-
+gulp.task('copy', gulp.series('_copymyfont', '_copybootstrapfont', '_copyfontawesomefont', '_copyvenderjs'));
 
 /**
  *
@@ -102,28 +101,29 @@ gulp.task('_copyvenderjs', function(){
  */
 
 // All styles, SASS subtask
-gulp.task('styles', function(){
+gulp.task('styles', function(dn){
 	gulp.styleinput = paths.in.vendersass;
-	runSequence('_styles');
+	gulp.series('_styles')();
+	dn();
 });
 
 // My styles, SASS subtask
-gulp.task('mystyles', function(){
+gulp.task('mystyles', function(dn){
 	gulp.styleinput = paths.in.mysass;
-	runSequence('_styles');
+	gulp.series('_styles')();
+	dn();
 });
 
-gulp.task('_styles', function(){
+gulp.task('_styles', function(dn){
 	if(!gulp.styleinput){
 		gulp.styleinput = [paths.in.mysass, paths.in.vendersass];
 	}
 
-	return gulp.src(gulp.styleinput)
+	gulp.src(gulp.styleinput)
 			.pipe(sass({
 				outputStyle: 'compressed'
 			}).on('error', sass.logError))
 			.pipe(autoprefixer({
-				browsers: ['last 2 versions'],
 				cascade: false
 			}))
 			.pipe(gulp.dest(paths.out.css))
@@ -132,6 +132,7 @@ gulp.task('_styles', function(){
 			.pipe(notify({
 				message: 'Styles compiled!'
 			}));
+	dn();
 });
 
 
@@ -142,29 +143,29 @@ gulp.task('_styles', function(){
  *
  */
 
-gulp.task('myscripts', function(){
+gulp.task('myscripts', function(dn){
 	gulp.scriptinput = paths.in.myjs;
-	runSequence('_scripts');
+	gulp.series('_scripts')();
+	dn();
 });
 
-gulp.task('_scripts', function(){
+gulp.task('_scripts', function(dn){
 	if(!gulp.scriptinput){
 		gulp.scriptinput = paths.in.myjs;
 	}
 
-	return gulp.src(gulp.scriptinput)
+	gulp.src(gulp.scriptinput)
 			// .pipe(jshint('.jshintrc'))
 			// .pipe(jshint.reporter('default'))
 			.pipe(concat('app.js'))
 			.pipe(gulp.dest(paths.out.js))
 			.pipe(rename({suffix: '.min'}))
-			.pipe(uglify({
-				compressor: {drop_debugger: false}
-			}))
+			.pipe(uglify())
 			.pipe(gulp.dest(paths.out.js))
 			.pipe(notify({
 				message: 'Scripts compiled!'
 			}));
+	dn();
 });
 
 
@@ -175,8 +176,8 @@ gulp.task('_scripts', function(){
  *
  */
 
-gulp.task('buster', function(){
-	return gulp.src(paths.in.buster)
+gulp.task('buster', function(dn){
+	gulp.src(paths.in.buster)
 	.pipe(bust({
 		'relativePath': paths.out.buster,
 		'fileName': busterFile
@@ -185,6 +186,7 @@ gulp.task('buster', function(){
 	.pipe(notify({
 		message: 'Caches busted!'
 	}));
+	dn();
 });
 
 
@@ -199,15 +201,15 @@ gulp.task('watch', function() {
 	livereload.listen();
 
 	// Watch .scss files
-	gulp.watch(paths.in.vendersass, ['mystyles']);
+	gulp.watch(paths.in.vendersass, gulp.series('mystyles'));
 
 	// Watch .js files
-	gulp.watch(paths.in.myjs, ['myscripts']);
+	gulp.watch(paths.in.myjs, gulp.series('myscripts'));
 
 	// Watch image files
 	// gulp.watch('src/images/**/*', ['images']);
 
-	gulp.watch(paths.in.buster, ['buster']).on('change', livereload.changed);
+	gulp.watch(paths.in.buster, gulp.series('buster')).on('change', livereload.changed);
 });
 
 

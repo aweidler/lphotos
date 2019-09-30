@@ -11,7 +11,7 @@ class AzurePhotosAdapter extends AzureAdapter{
 	 * {@inheritdoc}
 	 * @override
 	 */
-	public function getUrl($file)
+	public function getUrl($file = null)
 	{
 		return $this->fsConfig['blob_service_url'] 
 		. $this->pathSeparator 

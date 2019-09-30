@@ -102,7 +102,7 @@ $ffinalHeight: $fheight;
 		height: $hoodScale - $hoodWidth;
 		opacity: 1.0;
 		border-radius: 50%;
-		border: $hoodWidth / 2 solid $icon-Weidler-color * 0.2;
+		border: $hoodWidth / 2 solid #1f1f1f;
 		top: $center + $hoodWidth/2;
 		left: $center + $hoodWidth/2;
 		box-sizing: border-box;
@@ -137,7 +137,7 @@ $ffinalHeight: $fheight;
 		$i: index($icon-aperture-colors, $aperture-color);
 		.aflag-#{$i}{
 			z-index: #{$wrapper-index + $i};
-			background: $icon-Weidler-color * 1.2;
+			background: #b8b8b8;
 
 			// transform our 'aperture flags' around a circle
 			$degrees: ($i - 1) * (360 / length($icon-aperture-colors));
